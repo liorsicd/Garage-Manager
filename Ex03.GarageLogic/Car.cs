@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
 
 
 
-        public Car() : base()
+        public Car(EnergySource i_Engine) : base(i_Engine)
         {
             Wheels = new List<Wheel>(k_numOfWheels);
             for (int i = 0; i < k_numOfWheels; i++)

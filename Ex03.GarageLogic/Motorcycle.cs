@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
         private readonly int m_EngineVolume;
 
         //counstructor
-        public Motorcycle(EnergySource i_EnergySource)
+        public Motorcycle(EnergySource i_EnergySource) :base(i_EnergySource)
         {
 
         }

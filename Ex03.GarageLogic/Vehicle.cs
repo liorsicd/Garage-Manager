@@ -8,19 +8,29 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
+        public enum eTypeOfVehicle
+        {
+            Car,
+
+            Motorcycle,
+
+            Truck,
+        }
+
+
         private readonly string r_Model;
-        private readonly string r_LicenseNumber;
+        private string r_LicenseNumber;
         private float m_RemainingEnergyPercentage;
         private List<Wheel> m_Wheels;
-        private EnergySource m_Engine;
+        private readonly EnergySource r_Engine;
 
-        public Vehicle()
+        public Vehicle(EnergySource i_Engine)
         {
-            r_Model = string.Empty;
+            this.r_Engine = i_Engine;
             r_LicenseNumber = string.Empty;
             m_RemainingEnergyPercentage = 0;
-            m_Wheels = new List<Wheel>();
-            m_Engine = null;
+            m_Wheels = null;
+
         }
 
         public string Model
@@ -65,13 +75,10 @@ namespace Ex03.GarageLogic
         }
         public EnergySource EnergySource
         {
-            set
-            {
-                m_Engine = value;
-            }
+            
             get
             {
-                return m_Engine;
+                return this.r_Engine;
             }
         }
     }
