@@ -10,6 +10,7 @@ namespace Ex03.GarageLogic
     {
         public enum eLicenseType
         {
+            // commit test 
             a,
             b,
             c
