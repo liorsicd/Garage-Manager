@@ -17,35 +17,68 @@ namespace Ex03.GarageLogic
             Truck,
         }
 
+        protected int k_NumOfWheels;
+        protected int k_MaximumWheelPressure;
+        private string m_Model;
 
-        private readonly string r_Model;
-        private string r_LicenseNumber;
+        protected float k_MaxElectricAmount;
+        protected float k_MaxFuelAmount;
+
+        private string m_LicenseNumber;
+        private EnergySource m_EnergySource;
         private float m_RemainingEnergyPercentage;
         private List<Wheel> m_Wheels;
-        private readonly EnergySource r_Engine;
+        private readonly eTypeOfVehicle r_Type;
 
-        public Vehicle(EnergySource i_Engine)
+        protected Vehicle(eTypeOfVehicle i_Type)
         {
-            this.r_Engine = i_Engine;
-            r_LicenseNumber = string.Empty;
-            m_RemainingEnergyPercentage = 0;
-            m_Wheels = null;
-
+            this.r_Type = i_Type;
         }
+
+        public void setWheels()
+        {
+            Wheels = new List<Wheel>(k_NumOfWheels);
+            for(int i = 0; i < k_NumOfWheels; i++)
+            {
+                Wheels[i] = new Wheel(k_MaximumWheelPressure);
+            }
+        }
+
+        public void SetMaxAmountOfEnergy()
+        {
+            switch(this.EnergySource.EnergyType)
+            {
+                case EnergySource.eEnergyTypes.Electric:
+                    this.EnergySource.MaxAmountOfEnergy = this.MaxElectricAmount;
+                    break;
+                case EnergySource.eEnergyTypes.Fuel:
+                    this.EnergySource.MaxAmountOfEnergy = this.MaxFuelAmount;
+                    break;
+            }
+        }
+
 
         public string Model
         {
             get
             {
-                return r_Model;
+                return this.m_Model;
+            }
+            set
+            {
+                this.m_Model = value;
             }
         }
 
         public string LicenseNumber
         {
+            set
+            {
+                this.m_Model = value;
+            }
             get
             {
-                return r_LicenseNumber;
+                return this.m_LicenseNumber;
             }
         }
 
@@ -75,10 +108,38 @@ namespace Ex03.GarageLogic
         }
         public EnergySource EnergySource
         {
+            set
+            {
+                this.m_EnergySource = value;
+            }
             
             get
             {
-                return this.r_Engine;
+                return this.EnergySource;
+            }
+        }
+
+        public eTypeOfVehicle TypeVehicle
+        {
+            get
+            {
+                return this.r_Type;
+            }
+        }
+
+        public float MaxFuelAmount
+        {
+            get
+            {
+                return k_MaxFuelAmount;
+            }
+        }
+
+        public float MaxElectricAmount
+        {
+            get
+            {
+                return k_MaxElectricAmount;
             }
         }
     }

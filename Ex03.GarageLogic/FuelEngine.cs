@@ -7,44 +7,40 @@ namespace Ex03.GarageLogic
 {
     public class FuelEngine : EnergySource
     {
-        private readonly eFuelType r_FuelType;
-        private readonly float r_MaxFuelAmount;
+        private eFuelType r_FuelType;
+        private float r_MaxFuelAmount;
         private float m_CurrentFuelAmount;
+
         public enum eFuelType
         {
             Soler = 1,
+
             Octan95 = 2,
+
             Octan96 = 3,
+
             Octan98 = 4
         }
 
-
-        public eFuelType fuelType
+        public FuelEngine(EnergySource.eEnergyTypes i_EnergyType)
+            : base(i_EnergyType)
         {
-            get
-            {
-                return r_FuelType;
-            }
+
         }
 
-        public float MaxFuelAmount
+        public void SeteFuelType (eFuelType i_fuelType)
         {
-            get
-            {
-                return r_MaxFuelAmount;
-            }
+            this.r_FuelType = i_fuelType;
         }
 
-        public float CurrentFuelAmount
+        public void SetMaxFuelAmount(float i_MaxFuelAmount)
         {
-            get
-            {
-                return m_CurrentFuelAmount;
-            }
-            set
-            {
-                m_CurrentFuelAmount = value;
-            }
+            
+        }
+
+        public void SetCurrentFuelAmount(float i_CurrentFuelAmount)
+        {
+            this.m_CurrentFuelAmount = i_CurrentFuelAmount;
         }
 
         public void AddFuel(eFuelType i_FuelType, float i_AmountOfFuel)

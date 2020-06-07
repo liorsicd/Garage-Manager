@@ -10,13 +10,12 @@ namespace Ex03.GarageLogic
     {
         private const int k_NumOfWheels = 2;
         private const int k_MaximumWheelPressure = 30;
-        private readonly eLicenseType r_licenseType;
-        private readonly int m_EngineVolume;
+        private  eLicenseType m_LicenseType;
+        private  int m_EngineVolume;
 
-        //counstructor
-        public Motorcycle(EnergySource i_EnergySource) :base(i_EnergySource)
+        public Motorcycle(Vehicle.eTypeOfVehicle i_Type)
+            : base(i_Type)
         {
-
         }
 
         public enum eLicenseType
@@ -28,21 +27,16 @@ namespace Ex03.GarageLogic
         }
 
 
-        public int EngineVolume
+        public void SetEngineVolume(int i_EngineVolume)
         {
-            get
-            {
-                return m_EngineVolume;
-            }
+            this.m_EngineVolume = i_EngineVolume;
         }
 
-        public eLicenseType LicenseType
-        {
-            get
-            {
-                return r_licenseType;
-            }
 
+
+        public void setLicenseType(eLicenseType i_LicenseType)
+        {
+            this.m_LicenseType = i_LicenseType;
         }
     }
 }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class Garage
-    {
-        private List<carInGarage> carInGarages;
-    }
+    // public class Garage
+    // {
+    //     private List<carInGarage> carInGarages;
+    // }
 }

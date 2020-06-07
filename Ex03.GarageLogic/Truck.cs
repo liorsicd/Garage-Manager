@@ -11,30 +11,21 @@ namespace Ex03.GarageLogic
         private const int k_NumOfWheels = 16;
         private const int k_MaximumWheelPressure = 28;
         private bool b_IsDangerous;
-        private readonly float r_CargoVolume;
+        private float m_CargoVolume;
 
-
-        public Truck () : base() { }
-
-        public bool Isdangerous
+        public Truck(Vehicle.eTypeOfVehicle i_Type)
+            : base(i_Type)
         {
-            get
-            {
-                return b_IsDangerous;
-            }
-
-            set
-            {
-                b_IsDangerous = value;
-            }
+        }
+        public void SetIsdangerous(bool i_Isdangerous)
+        {
+            b_IsDangerous = i_Isdangerous;
         }
 
-        public float CargoVolume
+        public  void SetCargoVolume(float i_CargoVolume)
         {
-            get
-            {
-                return r_CargoVolume;
-            }
+            this.m_CargoVolume = i_CargoVolume;
+
         }
     }
 }
