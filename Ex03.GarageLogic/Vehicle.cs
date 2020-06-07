@@ -115,7 +115,7 @@ namespace Ex03.GarageLogic
             
             get
             {
-                return this.EnergySource;
+                return this.m_EnergySource;
             }
         }
 
