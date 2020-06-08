@@ -14,22 +14,6 @@ namespace Ex03.GarageLogic
         {
             VehicleFactory v1  = new VehicleFactory();
             v1.CreateVehicle(Vehicle.eTypeOfVehicle.Car);
-
-
-
-            List<MethodInfo> m1 = v1.getSetters();
-
-            foreach(MethodInfo m in m1)
-            {
-                ParameterInfo[] p = m.GetParameters();
-                ParameterInfo[] answer = new ParameterInfo[p.Length];
-
-                foreach(ParameterInfo prameter in p)
-                {
-
-                }
-            }
-            Console.ReadLine();
         }
     }
 }

@@ -9,8 +9,8 @@ namespace Ex03.GarageLogic
     public abstract class EnergySource
     {
         private eEnergyTypes m_EnergyType;
-        private float m_CurrentAmountOfEnergy;
-        private float m_MaxAmountOfEnergy;
+        protected float m_CurrentAmountOfEnergy;
+        protected float m_MaxAmountOfEnergy;
 
         public enum eEnergyTypes
         {
@@ -62,17 +62,40 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void FillEnergy(float i_AmountOfEnergy)
+        public void SetMaxAmountOfEnergy(Vehicle i_Vehicle)
         {
-            if (i_AmountOfEnergy < 0 || i_AmountOfEnergy + m_CurrentAmountOfEnergy > m_MaxAmountOfEnergy)
+            switch(m_EnergyType)
             {
-                //exception
-            }
-            else
-            {
-                m_CurrentAmountOfEnergy += i_AmountOfEnergy;
+                case eEnergyTypes.Fuel:
+                    this.m_MaxAmountOfEnergy = i_Vehicle.GetMaxFuelAmount();
+                    break;
+                case eEnergyTypes.Electric:
+                    this.m_MaxAmountOfEnergy = i_Vehicle.GetMaxElectricAmount();
+                    break;
             }
         }
 
+        public bool FillEnergy(float i_AmountOfEnergy)
+        {
+            bool returnValue = false;
+
+            if(!(i_AmountOfEnergy + this.CurrentAmountOfEnergy > this.m_MaxAmountOfEnergy))
+            {
+                m_CurrentAmountOfEnergy += i_AmountOfEnergy;
+                returnValue = true;
+            }
+
+            return returnValue;
+        }
+
+        public override string ToString()
+        {
+            return string.Format(
+                "Engine type: {1}{0} current amount of energy {2}{0}, maximum amount of energy {3}{0}",
+                Environment.NewLine,
+                this.m_EnergyType,
+                this.m_CurrentAmountOfEnergy,
+                this.m_MaxAmountOfEnergy);
+        }
     }
 }

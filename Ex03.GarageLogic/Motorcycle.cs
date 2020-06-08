@@ -10,6 +10,9 @@ namespace Ex03.GarageLogic
     {
         private const int k_NumOfWheels = 2;
         private const int k_MaximumWheelPressure = 30;
+
+        private const float k_MaxFuelAmount = 7;
+        private const float k_MaxElectricAmount = 1.2f;
         private  eLicenseType m_LicenseType;
         private  int m_EngineVolume;
 
@@ -37,6 +40,25 @@ namespace Ex03.GarageLogic
         public void setLicenseType(eLicenseType i_LicenseType)
         {
             this.m_LicenseType = i_LicenseType;
+        }
+        public override float GetMaxFuelAmount()
+        {
+            return k_MaxFuelAmount;
+        }
+
+        public override float GetMaxElectricAmount()
+        {
+            return k_MaxElectricAmount;
+        }
+
+        public override string ToString()
+        {
+            return String.Format(
+                "{3} License Type: {1}{0}, Engine Volume: {2}{0}",
+                Environment.NewLine,
+                this.m_LicenseType,
+                this.m_EngineVolume,
+                base.ToString());
         }
     }
 }

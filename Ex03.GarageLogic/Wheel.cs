@@ -8,17 +8,16 @@ namespace Ex03.GarageLogic
 {
     public class Wheel
     {
-        private readonly string r_ManufacturerName;
+        private string r_ManufacturerName;
         private readonly float r_MaxAirPressure;
         private float m_CurrentAirPressure;
         
-
-        //constructor
-        public Wheel(float i_MaxAirPressure)
+        public Wheel(float i_MaxAirPressure, string i_ManufacturerName)
         {
             r_MaxAirPressure = i_MaxAirPressure;
+            this.r_ManufacturerName = i_ManufacturerName;
         }
-
+        
         public string ManufacturerName
         {
             get
@@ -46,6 +45,7 @@ namespace Ex03.GarageLogic
                 m_CurrentAirPressure = value;
             }
         }
+
         public void AddAir(float i_AirToAdd)
         {
             if (i_AirToAdd + m_CurrentAirPressure > r_MaxAirPressure || i_AirToAdd < 0)
@@ -58,7 +58,13 @@ namespace Ex03.GarageLogic
             }
         }
 
-
-
+        public override string ToString()
+        {
+            return string.Format(
+                "Manufacturer Name: {1}{0} Current Air Pressure {2}{0} maximum Air Pressure",
+                Environment.NewLine,
+                this.m_CurrentAirPressure,
+                this.r_MaxAirPressure);
+        }
     }
 }

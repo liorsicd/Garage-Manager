@@ -41,9 +41,14 @@ namespace Ex03.GarageLogic
             Silver
         }
 
-        public float GetMaxFuelAmount()
+        public override float GetMaxFuelAmount()
         {
             return k_MaxFuelAmount;
+        }
+
+        public override float GetMaxElectricAmount()
+        {
+            return k_MaxElectricAmount;
         }
 
         public enum eNumOfDoors
@@ -54,6 +59,14 @@ namespace Ex03.GarageLogic
             Five = 5
         }
 
-
+        public override string ToString()
+        {
+            return String.Format(
+                "{3} Car Color: {1}{0}, Number Of Doors: {2}{0}",
+                Environment.NewLine,
+                this.m_CarColor,
+                this.m_NumOfDoors,
+                base.ToString());
+        }
     }
 }

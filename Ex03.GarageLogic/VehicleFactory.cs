@@ -44,8 +44,6 @@ namespace Ex03.GarageLogic
                     this.m_Setters.Add(setter);
                 }
             }
-
-            this.m_Vehicle.setWheels();
         }
 
         public void SetVehicleParams(string i_LicenseNumber, string i_Model)
@@ -61,18 +59,18 @@ namespace Ex03.GarageLogic
             switch(i_EnergySource)
             {
                 case EnergySource.eEnergyTypes.Electric:
-                    this.m_Vehicle.EnergySource = new ElectricEngine();
+                    this.m_Vehicle.EnergySource = new ElectricEngine(EnergySource.eEnergyTypes.Electric);
                     break;
                 case EnergySource.eEnergyTypes.Fuel:
-                    this.m_Vehicle.EnergySource = new FuelEngine();
+                    this.m_Vehicle.EnergySource = new FuelEngine(EnergySource.eEnergyTypes.Fuel);
                     break;
             }
 
-            this.m_Vehicle.SetMaxAmountOfEnergy();
+            this.m_Vehicle.EnergySource.SetMaxAmountOfEnergy(this.m_Vehicle);
         }
 
 
-
+        // all inputs from user
         public List<MethodInfo> getSetters()
         {
 
@@ -90,13 +88,13 @@ namespace Ex03.GarageLogic
             return this.m_Vehicle;
         }
         
-
-        public ParameterInfo[] GetParams(object i_Obj, MethodInfo i_Method)
-        {
-            Type typeOfObj = i_Obj.GetType();
-            ParameterInfo[] parameters = i_Method.GetParameters();
-            return parameters;
-        }
+        //
+        // public ParameterInfo[] GetParams(object i_Obj, MethodInfo i_Method)
+        // {
+        //     Type typeOfObj = i_Obj.GetType();
+        //     ParameterInfo[] parameters = i_Method.GetParameters();
+        //     return parameters;
+        // }
     }
 
 

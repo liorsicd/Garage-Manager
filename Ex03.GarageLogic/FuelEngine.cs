@@ -8,8 +8,6 @@ namespace Ex03.GarageLogic
     public class FuelEngine : EnergySource
     {
         private eFuelType r_FuelType;
-        private float r_MaxFuelAmount;
-        private float m_CurrentFuelAmount;
 
         public enum eFuelType
         {
@@ -25,7 +23,6 @@ namespace Ex03.GarageLogic
         public FuelEngine(EnergySource.eEnergyTypes i_EnergyType)
             : base(i_EnergyType)
         {
-
         }
 
         public void SeteFuelType (eFuelType i_fuelType)
@@ -33,26 +30,14 @@ namespace Ex03.GarageLogic
             this.r_FuelType = i_fuelType;
         }
 
-        public void SetMaxFuelAmount(float i_MaxFuelAmount)
+        public bool checkFuelType(eFuelType i_FuelType)
         {
-            
+            return this.r_FuelType == i_FuelType;
         }
 
-        public void SetCurrentFuelAmount(float i_CurrentFuelAmount)
+        public override string ToString()
         {
-            this.m_CurrentFuelAmount = i_CurrentFuelAmount;
+            return string.Format("{1} Fuel Type: {2}{0}", Environment.NewLine, base.ToString(), this.r_FuelType);
         }
-
-        public void AddFuel(eFuelType i_FuelType, float i_AmountOfFuel)
-        {
-            if (i_FuelType != r_FuelType)
-            {
-                throw new ArgumentException(string.Format("The gas type dose not match the car vehicle fuel type. chosen vehicle fuel type is: {0}", r_FuelType));
-            }
-
-            FillEnergy(i_AmountOfFuel);
-        }
-
-
     }
 }

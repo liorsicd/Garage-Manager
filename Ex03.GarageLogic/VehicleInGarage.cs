@@ -6,19 +6,29 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class CarInGarage
+    public class VehicleInGarage
     {
-        private Vehicle m_Vehicle;
+        private readonly Vehicle m_Vehicle;
         private readonly string r_OwnerName;
         private readonly string r_PhoneNumber;
         private eStatus m_status;
        
         public enum eStatus
         {
+            OutOfGarage = 0,
             InRepair = 1,
             Repaired = 2,
             Payed = 3
         }
+
+        public VehicleInGarage(string i_OwnerName, string i_PhoneNumber,  Vehicle i_Vehicle)
+        {
+            this.r_OwnerName = i_OwnerName;
+            this.r_PhoneNumber = PhoneNumber;
+            this.m_Vehicle = i_Vehicle;
+            this.m_status = 0;
+        }
+
 
         public string PhoneNumber
         {

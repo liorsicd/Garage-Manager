@@ -20,10 +20,7 @@ namespace Ex03.GarageLogic
         protected int k_NumOfWheels;
         protected int k_MaximumWheelPressure;
         private string m_Model;
-
-        protected float k_MaxElectricAmount;
-        protected float k_MaxFuelAmount;
-
+        
         private string m_LicenseNumber;
         private EnergySource m_EnergySource;
         private float m_RemainingEnergyPercentage;
@@ -35,26 +32,20 @@ namespace Ex03.GarageLogic
             this.r_Type = i_Type;
         }
 
-        public void setWheels()
+        public void SetWheels(string i_ManufacturerName )
         {
             Wheels = new List<Wheel>(k_NumOfWheels);
             for(int i = 0; i < k_NumOfWheels; i++)
             {
-                Wheels[i] = new Wheel(k_MaximumWheelPressure);
+                Wheels[i] = new Wheel(k_MaximumWheelPressure, i_ManufacturerName);
             }
         }
 
-        public void SetMaxAmountOfEnergy()
+
+        public void UpdateRemaningEnergy()
         {
-            switch(this.EnergySource.EnergyType)
-            {
-                case EnergySource.eEnergyTypes.Electric:
-                    this.EnergySource.MaxAmountOfEnergy = this.MaxElectricAmount;
-                    break;
-                case EnergySource.eEnergyTypes.Fuel:
-                    this.EnergySource.MaxAmountOfEnergy = this.MaxFuelAmount;
-                    break;
-            }
+            this.m_RemainingEnergyPercentage =
+                this.m_EnergySource.CurrentAmountOfEnergy / this.m_EnergySource.MaxAmountOfEnergy * 100;
         }
 
 
@@ -127,20 +118,18 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public float MaxFuelAmount
-        {
-            get
-            {
-                return k_MaxFuelAmount;
-            }
-        }
+        public abstract float GetMaxElectricAmount();
 
-        public float MaxElectricAmount
+        public abstract float GetMaxFuelAmount();
+
+        public override string ToString()
         {
-            get
-            {
-                return k_MaxElectricAmount;
-            }
+            return String.Format(
+                "License Number: {1}{0} Model Name: {2}{0}{3}",
+                Environment.NewLine,
+                this.m_LicenseNumber,
+                this.m_Model,
+                this.m_Wheels[0]);
         }
     }
 }
