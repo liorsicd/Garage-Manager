@@ -10,9 +10,7 @@ namespace Ex03.GarageLogic
     {
         private const int k_NumOfWheels = 16;
         private const int k_MaximumWheelPressure = 28;
-
         private const float k_MaxFuelAmount = 120;
-
         private const float k_MaxElectricAmount = -1;
         private bool b_IsDangerous;
         private float m_CargoVolume;
@@ -30,7 +28,6 @@ namespace Ex03.GarageLogic
         public void SetCargoVolume(float i_CargoVolume)
         {
             this.m_CargoVolume = i_CargoVolume;
-
         }
 
         public override float GetMaxFuelAmount()

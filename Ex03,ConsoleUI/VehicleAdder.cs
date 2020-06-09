@@ -68,7 +68,16 @@ namespace Ex03_ConsoleUI
             }
             while(!this.m_Validation.IsValidVehicleType(out vehicleType));
 
-            this.m_Factory.CreateVehicle(vehicleType);
+            try
+            {
+                this.m_Factory.CreateVehicle(vehicleType);
+            }
+            catch(ArgumentException e)
+            {
+                Display.Write(e.Message);
+                this.setVehicleParams();
+            }
+            
 
             runtObjectsSetters(this.m_Factory.GetVehicleSetters());
 
@@ -83,8 +92,16 @@ namespace Ex03_ConsoleUI
             }
             while(!this.m_Validation.IsValidEnergySource(out energyType));
 
-            this.m_Factory.SetEnergySource(energyType);
-
+            try
+            {
+                this.m_Factory.SetEnergySource(energyType);
+            }
+            catch(ArgumentException e)
+            {
+                Display.Write(e.Message);
+                this.setEnergySourceParams();
+            }
+            
             runtObjectsSetters(this.m_Factory.GetEnergySourceSetters());
         }
 
@@ -224,6 +241,17 @@ namespace Ex03_ConsoleUI
                     while(!this.m_Validation.IsValidFuelType(out fuelType));
 
                     returnValue = fuelType;
+                    break;
+
+                case "i_CurrentAirPressure":
+                    float currentAir;
+                    do
+                    {
+                        Display.Write(Messages); //get current air
+                    }
+                    while(!this.m_Validation.IsValidFloat(out currentAir));
+
+                    returnValue = currentAir;
                     break;
 
                 default:
