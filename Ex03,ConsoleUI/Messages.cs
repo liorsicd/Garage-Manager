@@ -11,8 +11,19 @@ namespace Ex03_ConsoleUI
         private static string[] m_MessagesToUser = 
             {
             @"Welcome to the garage. How we can serve you today?",
-            "Press the number of the desired option and then press enter:",
-            "Please enter license number", 
+            "Press the number of the desired option and then press enter: 1. Add a new vehicle to the garage 
+            2. Display all license plates numbers
+            3. Change vehicle status
+            4. Refuel a vehicle
+            5. Recharge an electric vehicle
+            6. Inflate wheels to maximum
+            7. Display a vehicle's full details
+            8. Exit",
+            "Please enter license number",
+            "Please enter your name",
+            "Please enter your phone number",
+            "Please enter your type of engine",
+            "Please enter your vehicle model",
             "Not valid input, please try again",
             "Not valid name, please try again",
             "Garage is empty, No vehicles to display",
