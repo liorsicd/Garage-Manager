@@ -68,7 +68,7 @@ namespace Ex03.GarageLogic
                 }
             }
 
-            currentVehicleInGarage.Vehicle.UpdateRemaningEnergy();
+            currentVehicleInGarage.Vehicle.UpdateRemainingEnergy();
 
             return returnValue;
         }
@@ -81,7 +81,7 @@ namespace Ex03.GarageLogic
                 returnValue = currentVehicleInGarage.Vehicle.EnergySource.FillEnergy(i_MinutesToAdd / 60);
             }
 
-            currentVehicleInGarage.Vehicle.UpdateRemaningEnergy();
+            currentVehicleInGarage.Vehicle.UpdateRemainingEnergy();
 
             return returnValue;
         }

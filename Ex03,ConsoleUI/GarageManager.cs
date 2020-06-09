@@ -14,22 +14,21 @@ namespace Ex03_ConsoleUI
 
         private VehicleAdder m_VehicleAdder;
 
-        private Display m_Display;
 
-        private Messages m_Messeges;
+
 
 
         public GarageManager()
         {
             this.m_Garage = new Garage();
             this.m_VehicleAdder = new VehicleAdder();
-            this.m_Display = new Display();
-            this.m_Messeges = new Messages();
         }
 
         public void AddVehicle()
         {
-
+            this.m_VehicleAdder.Start();
+            
+            this.m_Garage.InsertVehicle(this.m_VehicleAdder.GetNewVehicle());
         }
 
     }
