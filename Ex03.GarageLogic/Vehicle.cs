@@ -48,7 +48,6 @@ namespace Ex03.GarageLogic
                 this.m_EnergySource.CurrentAmountOfEnergy / this.m_EnergySource.MaxAmountOfEnergy * 100;
         }
 
-
         public string Model
         {
             get

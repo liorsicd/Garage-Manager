@@ -13,8 +13,8 @@ namespace Ex03.GarageLogic
 
         private const float k_MaxFuelAmount = 7;
         private const float k_MaxElectricAmount = 1.2f;
-        private  eLicenseType m_LicenseType;
-        private  int m_EngineVolume;
+        private eLicenseType m_LicenseType;
+        private int m_EngineVolume;
 
         public Motorcycle(Vehicle.eTypeOfVehicle i_Type)
             : base(i_Type)
