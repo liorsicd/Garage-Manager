@@ -8,57 +8,101 @@ namespace Ex03_ConsoleUI
 {
     public class Messages
     {
-        private static string[] m_MessagesToUser = 
+        private static string[] m_MessagesAddVehicle = 
             {
             @"Welcome to the garage. How we can serve you today?",
-            "Press the number of the desired option and then press enter: 1. Add a new vehicle to the garage 
-            2. Display all license plates numbers
-            3. Change vehicle status
-            4. Refuel a vehicle
-            5. Recharge an electric vehicle
-            6. Inflate wheels to maximum
-            7. Display a vehicle's full details
-            8. Exit",
             "Please enter license number",
-            "Please enter your name",
-            "Please enter your phone number",
-            "Please enter your type of engine",
-            "Please enter your vehicle model",
-            "Not valid input, please try again",
+            "Please enter owner name",
+            "Please enter owner phone number",
+            "Please enter owner vehicle type",
+            "Please enter owner type of engine",
+            "Please enter owner vehicle model",
+            "Please enter owner vehicle energy source",
+            "Please enter owner wheel ManufacturerName",
+            "Please enter owner car color",
+            "Please enter owner car num of doors",
+            "Please enter owner engine volume",
+            "Please enter owner license type",
+            "Please enter owner cargo volume",
+            "Please enter yes if carrying dangerous materials, else no", "Please enter owner current amount of energy",
+            "Please enter owner fuel type",
+            "Please enter owner current air pressure"
+            };
+
+        private static string[] m_ErrorMessagesToUser =
+            {
+            "Invalid input, please try again",
+            "Invalid String number, should contain only numbers",
+            "Invalid Vehicle Type, please try again",
             "Not valid name, please try again",
             "Garage is empty, No vehicles to display",
-            "Press the number of the desired filter and then press enter",
-            "Refueled your vehicle successfully.",
-            "Recharged your vehicle successfully.", 
-            "Inflated your wheels to maximum.",
-            "Please enter amount to add",
+            "Invalid type of energy, please tey again",
+            "Invalid fuel type, please try again",
+            "Invalid num of doors, please try again",
+            "Invalid color, please try again",
+            "Invalid license type, please try again",
             "Not valid energy, please try again",
-            "Thank you for using the garage management program, Bye Bye!"
+            };
+
+        private static string[] m_MessagesServiceUser =
+            {
+                "Refueled your vehicle successfully.",
+                "Recharged your vehicle successfully.",
+                "Inflated your wheels to maximum.",
+                "Please enter amount to add",
+                "Thank you for using the garage management program, Bye Bye!"
             };
 
 
 
-    public enum eMessagesToUser
+        public enum eAddVehicle
         {
             WelcomeUser = 0,
-            Menu = 1,
-            EnterLicenseNumber = 2,
-            InvalidInput = 3,
-            InvalidName = 4,
-            EnterAmountToAdd = 5,
-            GarageIsEmpty = 6,
-            ShowLicenseByFilter = 7,
-            RefuelSuccess = 8,
-            RechargeSuccess = 9,
-            ReInflateToMaxSuccess = 10,
-            InvalidEnergy = 11,
-            GoodBye = 12
+            EnterLicenseNumber = 1,
+            OwnerName = 2,
+            PhoneNumber = 3,
+            VehicleType = 4,
+            TypeOfEngine = 5,
+            VehicleModel = 6,
+            EnergySource = 7,
+            WheelManufacturerName = 8,
+            CarColor = 9,
+            NumOfDoors = 10,
+            EngineVolume = 11,
+            LicenseType = 12,
+            CargoVolume = 13,
+            IsDangerous = 14,
+            FuelType = 15
         }
 
-    public static string GetMessage(eMessagesToUser i_Messages)
-    {
-        return m_MessagesToUser[(int)i_Messages];
+
+        public enum eErrorMessagesToUser
+        {
+            InvalidInput = 0,
+            InvalidStringNum = 1,
+            InvalidVehicleType = 2,
+            InvalidName = 3,
+            GarageIsEmpty = 4,
+            InvalidEnergy = 5,
+            InvalidFuelType = 6,
+            InvalidNumDoors = 7,
+            InvalidColor = 8,
+            InvalidLicenseType = 9
     }
+
+
+
+        public static string GetErrorMessage(eErrorMessagesToUser i_Messages)
+    {
+        return m_ErrorMessagesToUser[(int)i_Messages];
+    }
+
+
+
+        public static string GetMessageAddVehicle(eAddVehicle i_Messages)
+        {
+            return m_MessagesAddVehicle[(int)i_Messages];
+        }
     }
 }
 

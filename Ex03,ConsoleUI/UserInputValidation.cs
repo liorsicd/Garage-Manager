@@ -20,7 +20,7 @@ namespace Ex03_ConsoleUI
             
             if(!Enum.IsDefined(typeof(Vehicle.eTypeOfVehicle), vehicleType))
             {
-                Display.Write(i_Msg: Messages.GetMessage(Messages.eMessagesToUser.InvalidInput));
+                Display.Write(i_Msg: Messages.GetMessage(Messages.eErrorMessagesToUser.InvalidInput));
                 returnValue = false;
             }
             
