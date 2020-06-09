@@ -129,7 +129,7 @@ namespace Ex03_ConsoleUI
                     string licenseNumber;
                     do
                     {
-                        Display.Write(Messages); //get LicenseNumber
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber)); //get LicenseNumber
                     }
                     while(!this.m_Validation.IsValidStringNumber(out licenseNumber));
                     returnValue = licenseNumber;
@@ -139,7 +139,7 @@ namespace Ex03_ConsoleUI
                     string model;
                     do
                     {
-                        Display.Write(Messages); //get model
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.VehicleModel)); //get model
                     }
                     while(!this.m_Validation.IsValidName(out model));
 
@@ -150,7 +150,7 @@ namespace Ex03_ConsoleUI
                     string manufacturerName;
                     do
                     {
-                        Display.Write(Messages); //ManufacturerName
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.WheelManufacturerName)); //ManufacturerName
                     }
                     while(!this.m_Validation.IsValidName(out manufacturerName));
 
@@ -161,7 +161,7 @@ namespace Ex03_ConsoleUI
                     Car.eCarColor color;
                     do
                     {
-                        Display.Write(Messages); //get car color
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.CarColor)); //get car color
                     }
                     while(!this.m_Validation.IsValidCarColor(out color));
                     returnValue = color;
@@ -170,7 +170,7 @@ namespace Ex03_ConsoleUI
                     Car.eNumOfDoors numOfDoors;
                     do
                     {
-                        Display.Write(Messages); //get car color
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.NumOfDoors)); 
                     }
                     while(!this.m_Validation.IsValidNumOfDoors(out numOfDoors));
                     returnValue = numOfDoors;
@@ -180,7 +180,7 @@ namespace Ex03_ConsoleUI
                     int engineVol;
                     do
                     {
-                        Display.Write(Messages); //get engine vol
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EngineVolume)); 
                     }
                     while(!this.m_Validation.IsValidInteger(out engineVol));
                     returnValue = engineVol;
@@ -190,7 +190,7 @@ namespace Ex03_ConsoleUI
                     Motorcycle.eLicenseType licenseType;
                     do
                     {
-                        Display.Write(Messages); //get license type
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.LicenseType)); 
                     }
                     while(!this.m_Validation.IsValidLicenseType(out licenseType));
 
@@ -201,7 +201,7 @@ namespace Ex03_ConsoleUI
                     float cargoVol;
                     do
                     {
-                        Display.Write(Messages); //get cargo volume
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.CargoVolume)); //get cargo volume
                     }
                     while(!this.m_Validation.IsValidFloat(out cargoVol));
 
@@ -212,7 +212,7 @@ namespace Ex03_ConsoleUI
                     bool isDan;
                     do
                     {
-                        Display.Write(Messages); //get is dangerous
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.IsDangerous)); //get is dangerous
                     }
                     while(!this.m_Validation.IsValidBoolAnswer(out isDan));
 
@@ -223,7 +223,7 @@ namespace Ex03_ConsoleUI
                     float currentAmount;
                         do
                         {
-                            Display.Write(Messages); //get current amount
+                            Display.Write(Messages.GetMessageAddVehicle()); //get current amount
                         }
                         while(!this.m_Validation.IsValidFloat(out currentAmount));
 
@@ -234,7 +234,7 @@ namespace Ex03_ConsoleUI
                     FuelEngine.eFuelType fuelType;
                     do
                     {
-                        Display.Write(Messages); //get fuelType
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.FuelType)); //get fuelType
                     }
                     while(!this.m_Validation.IsValidFuelType(out fuelType));
 
@@ -245,7 +245,7 @@ namespace Ex03_ConsoleUI
                     float currentAir;
                     do
                     {
-                        Display.Write(Messages); //get current air
+                        Display.Write(Messages.GetMessageAddVehicle(e)); //get current air
                     }
                     while(!this.m_Validation.IsValidFloat(out currentAir));
                     returnValue = currentAir;
