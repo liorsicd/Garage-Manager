@@ -10,6 +10,7 @@ namespace Ex03_ConsoleUI
     {
         private static string[] m_MessagesAddVehicle = 
             {
+                //menu
             @"Welcome to the garage. How we can serve you today?",
             "Please enter license number",
             "Please enter owner name",
@@ -72,7 +73,9 @@ namespace Ex03_ConsoleUI
             LicenseType = 12,
             CargoVolume = 13,
             IsDangerous = 14,
-            FuelType = 15
+            FuelType = 15,
+            CurrentAirPressure = 16,
+            CurrentEnergyAmount = 17
         }
 
 
