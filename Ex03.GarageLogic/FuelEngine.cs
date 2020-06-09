@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 {
     public class FuelEngine : EnergySource
     {
-        private eFuelType r_FuelType;
+        private eFuelType m_FuelType;
 
         public enum eFuelType
         {
@@ -25,19 +25,19 @@ namespace Ex03.GarageLogic
         {
         }
 
-        public void SetFuelType (eFuelType i_fuelType)
+        public void SetFuelType(eFuelType i_FuelType)
         {
-            this.r_FuelType = i_fuelType;
+            this.m_FuelType = i_FuelType;
         }
 
         public bool checkFuelType(eFuelType i_FuelType)
         {
-            return this.r_FuelType == i_FuelType;
+            return this.m_FuelType == i_FuelType;
         }
 
         public override string ToString()
         {
-            return string.Format("{1} Fuel Type: {2}{0}", Environment.NewLine, base.ToString(), this.r_FuelType);
+            return string.Format("{1} Fuel Type: {2}{0}", Environment.NewLine, base.ToString(), this.m_FuelType);
         }
     }
 }

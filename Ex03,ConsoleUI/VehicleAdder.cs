@@ -14,14 +14,14 @@ namespace Ex03_ConsoleUI
     {
         private VehicleFactory m_Factory;
 
-        private UserInputValidtaion m_Validtaion;
+        private UserInputValidation m_Validation;
 
         private bool m_IsReady;
 
         public VehicleAdder()
         {
             this.m_Factory = new VehicleFactory();
-            this.m_Validtaion = new UserInputValidtaion();
+            this.m_Validation = new UserInputValidation();
             this.m_IsReady = false;
         }
 
@@ -32,7 +32,7 @@ namespace Ex03_ConsoleUI
             setVehicleInGarageParams();
             m_IsReady = true;
         }
-
+        
         public VehicleInGarage GetNewVehicle()
         {
             return this.m_IsReady ? this.m_Factory.GetVehicleInGarage() : null;
@@ -43,16 +43,16 @@ namespace Ex03_ConsoleUI
             string ownerName;
             do
             {
-                Display.Write(this.m_Messages); //get name
+                Display.Write(Messages.); //get name
             }
-            while(!this.m_Validtaion.IsValidName(out ownerName));
+            while(!this.m_Validation.IsValidName(out ownerName));
 
             string phoneNumber;
             do
             {
-                Display.Write(this.m_Messages); //get phone
+                Display.Write(Messages); //get phone
             }
-            while(!this.m_Validtaion.IsValidName(out phoneNumber));
+            while(!this.m_Validation.IsValidName(out phoneNumber));
 
 
 
@@ -64,9 +64,9 @@ namespace Ex03_ConsoleUI
             Vehicle.eTypeOfVehicle vehicleType;
             do
             {
-                Display.Write(this.m_Messages); //vic type
+                Display.Write(Messages); //vic type
             }
-            while(!this.m_Validtaion.IsValidVehicleType(out vehicleType));
+            while(!this.m_Validation.IsValidVehicleType(out vehicleType));
 
             this.m_Factory.CreateVehicle(vehicleType);
 
@@ -81,7 +81,7 @@ namespace Ex03_ConsoleUI
             {
                 Display.Write(Messages.GetMessage()); //get energy source
             }
-            while(!this.m_Validtaion.IsValidEnergySource(out energyType));
+            while(!this.m_Validation.IsValidEnergySource(out energyType));
 
             this.m_Factory.SetEnergySource(energyType);
 
@@ -116,7 +116,7 @@ namespace Ex03_ConsoleUI
                     {
                         Display.Write(Messages); //get LicenseNumber
                     }
-                    while(!this.m_Validtaion.IsValidStringNumber(out licenseNumber));
+                    while(!this.m_Validation.IsValidStringNumber(out licenseNumber));
                     returnValue = licenseNumber;
                     break;
 
@@ -126,7 +126,7 @@ namespace Ex03_ConsoleUI
                     {
                         Display.Write(Messages); //get model
                     }
-                    while(!this.m_Validtaion.IsValidName(out model));
+                    while(!this.m_Validation.IsValidName(out model));
 
                     returnValue = model;
                     break;
@@ -137,7 +137,7 @@ namespace Ex03_ConsoleUI
                     {
                         Display.Write(Messages); //ManufacturerName
                     }
-                    while(!this.m_Validtaion.IsValidName(out manufacturerName));
+                    while(!this.m_Validation.IsValidName(out manufacturerName));
 
                     returnValue = manufacturerName;
                     break;
@@ -148,7 +148,7 @@ namespace Ex03_ConsoleUI
                     {
                         Display.Write(Messages); //get car color
                     }
-                    while(!this.m_Validtaion.IsValidCarColor(out color));
+                    while(!this.m_Validation.IsValidCarColor(out color));
                     returnValue = color;
                     break;
                 case "i_NumOfDoors":
@@ -157,7 +157,7 @@ namespace Ex03_ConsoleUI
                     {
                         Display.Write(Messages); //get car color
                     }
-                    while(!this.m_Validtaion.IsValidNumOfDoors(out numOfDoors));
+                    while(!this.m_Validation.IsValidNumOfDoors(out numOfDoors));
                     returnValue = numOfDoors;
                     break;
 
@@ -167,7 +167,7 @@ namespace Ex03_ConsoleUI
                     {
                         Display.Write(Messages); //get engine vol
                     }
-                    while(!this.m_Validtaion.IsValidInteger(out engineVol));
+                    while(!this.m_Validation.IsValidInteger(out engineVol));
                     returnValue = engineVol;
                     break;
 
@@ -177,7 +177,7 @@ namespace Ex03_ConsoleUI
                     {
                         Display.Write(Messages); //get license type
                     }
-                    while(!this.m_Validtaion.IsValidLicenseType(out licenseType));
+                    while(!this.m_Validation.IsValidLicenseType(out licenseType));
 
                     returnValue = licenseType;
                     break;
@@ -188,7 +188,7 @@ namespace Ex03_ConsoleUI
                     {
                         Display.Write(Messages); //get cargo volume
                     }
-                    while(!this.m_Validtaion.IsValidFloat(out cargoVol));
+                    while(!this.m_Validation.IsValidFloat(out cargoVol));
 
                     returnValue = cargoVol;
                     break;
@@ -199,7 +199,7 @@ namespace Ex03_ConsoleUI
                     {
                         Display.Write(Messages); //get is dangerous
                     }
-                    while(!this.m_Validtaion.IsValidBoolAnswer(out isDan));
+                    while(!this.m_Validation.IsValidBoolAnswer(out isDan));
 
                     returnValue = isDan;
                     break;
@@ -210,7 +210,7 @@ namespace Ex03_ConsoleUI
                         {
                             Display.Write(Messages); //get current amount
                         }
-                        while(!this.m_Validtaion.IsValidFloat(out currentAmount));
+                        while(!this.m_Validation.IsValidFloat(out currentAmount));
 
                         returnValue = currentAmount;
                         break;
@@ -221,7 +221,7 @@ namespace Ex03_ConsoleUI
                     {
                         Display.Write(Messages); //get fuelType
                     }
-                    while(!this.m_Validtaion.IsValidFuelType(out fuelType));
+                    while(!this.m_Validation.IsValidFuelType(out fuelType));
 
                     returnValue = fuelType;
                     break;

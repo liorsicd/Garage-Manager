@@ -9,7 +9,7 @@ namespace Ex03_ConsoleUI
 
     using Ex03.GarageLogic;
 
-    public class UserInputValidtaion
+    public class UserInputValidation
     {
         public bool IsValidVehicleType(out Vehicle.eTypeOfVehicle o_VehicleType)
         {

@@ -14,10 +14,6 @@ namespace Ex03_ConsoleUI
 
         private VehicleAdder m_VehicleAdder;
 
-
-
-
-
         public GarageManager()
         {
             this.m_Garage = new Garage();
@@ -30,6 +26,5 @@ namespace Ex03_ConsoleUI
             
             this.m_Garage.InsertVehicle(this.m_VehicleAdder.GetNewVehicle());
         }
-
     }
 }
