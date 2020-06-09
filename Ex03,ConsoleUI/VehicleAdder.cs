@@ -14,15 +14,14 @@ namespace Ex03_ConsoleUI
     {
         private VehicleFactory m_Factory;
 
-
-        private UserInputValidtaion m_Validtaion;
+        private UserInputValidation m_Validation;
 
         private bool m_IsReady;
 
         public VehicleAdder()
         {
             this.m_Factory = new VehicleFactory();
-            this.m_Validtaion = new UserInputValidtaion();
+            this.m_Validation = new UserInputValidation();
             this.m_IsReady = false;
         }
 
@@ -33,7 +32,7 @@ namespace Ex03_ConsoleUI
             setVehicleInGarageParams();
             m_IsReady = true;
         }
-
+        
         public VehicleInGarage GetNewVehicle()
         {
             return this.m_IsReady ? this.m_Factory.GetVehicleInGarage() : null;
@@ -44,16 +43,16 @@ namespace Ex03_ConsoleUI
             string ownerName;
             do
             {
-                Display.Write(this.m_Messages); //get name
+                Display.Write(Messages.); //get name
             }
-            while(!this.m_Validtaion.IsValidName(out ownerName));
+            while(!this.m_Validation.IsValidName(out ownerName));
 
             string phoneNumber;
             do
             {
-                Display.Write(this.m_Messages); //get phone
+                Display.Write(Messages); //get phone
             }
-            while(!this.m_Validtaion.IsValidName(out phoneNumber));
+            while(!this.m_Validation.IsValidName(out phoneNumber));
 
 
 
@@ -65,11 +64,20 @@ namespace Ex03_ConsoleUI
             Vehicle.eTypeOfVehicle vehicleType;
             do
             {
-                Display.Write(this.m_Messages); //vic type
+                Display.Write(Messages); //vic type
             }
-            while(!this.m_Validtaion.IsValidVehicleType(out vehicleType));
+            while(!this.m_Validation.IsValidVehicleType(out vehicleType));
 
-            this.m_Factory.CreateVehicle(vehicleType);
+            try
+            {
+                this.m_Factory.CreateVehicle(vehicleType);
+            }
+            catch(ArgumentException e)
+            {
+                Display.Write(e.Message);
+                this.setVehicleParams();
+            }
+            
 
             runtObjectsSetters(this.m_Factory.GetVehicleSetters());
 
@@ -80,12 +88,20 @@ namespace Ex03_ConsoleUI
             EnergySource.eEnergyTypes energyType;
             do
             {
-                Display.Write(this.m_Messages); //get energy source
+                Display.Write(Messages.GetMessage()); //get energy source
             }
-            while(!this.m_Validtaion.IsValidEnergySource(out energyType));
+            while(!this.m_Validation.IsValidEnergySource(out energyType));
 
-            this.m_Factory.SetEnergySource(energyType);
-
+            try
+            {
+                this.m_Factory.SetEnergySource(energyType);
+            }
+            catch(ArgumentException e)
+            {
+                Display.Write(e.Message);
+                this.setEnergySourceParams();
+            }
+            
             runtObjectsSetters(this.m_Factory.GetEnergySourceSetters());
         }
 
@@ -100,7 +116,7 @@ namespace Ex03_ConsoleUI
                     paramArr[i] = this.getParameterFromUser(paramArr[i]);
                 }
 
-                this.m_Factory.RunSetter(s,paramArr);
+                this.m_Factory.RunSetter(s, paramArr);
             }
         }
 
@@ -108,80 +124,138 @@ namespace Ex03_ConsoleUI
 
         private ParameterInfo getParameterFromUser(ParameterInfo i_Parameter)
         {
-            object returnValue = null;
+            object returnValue;
             switch(i_Parameter.Name)
             {
                 case "i_LicenseNumber":
+                    string licenseNumber;
                     do
                     {
-                        Display.Write(this.m_Messages); //get LicenseNumber
+                        Display.Write(Messages); //get LicenseNumber
                     }
-                    while(!this.m_Validtaion.IsValidStringNumber(out returnValue));
+                    while(!this.m_Validation.IsValidStringNumber(out licenseNumber));
+                    returnValue = licenseNumber;
                     break;
 
                 case "i_Model":
+                    string model;
                     do
                     {
-                        Display.Write(this.m_Messages); //get model
+                        Display.Write(Messages); //get model
                     }
-                    while(!this.m_Validtaion.IsValidName(out returnValue));
+                    while(!this.m_Validation.IsValidName(out model));
+
+                    returnValue = model;
                     break;
 
                 case "i_ManufacturerName":
+                    string manufacturerName;
                     do
                     {
-                        Display.Write(this.m_Messages); //ManufacturerName
+                        Display.Write(Messages); //ManufacturerName
                     }
-                    while(!this.m_Validtaion.IsValidName(out returnValue));
+                    while(!this.m_Validation.IsValidName(out manufacturerName));
+
+                    returnValue = manufacturerName;
                     break;
 
                 case "i_CarColor":
-                    //returnValue = new Car.eCarColor();
+                    Car.eCarColor color;
                     do
                     {
-                        Display.Write(this.m_Messages); //get car color
+                        Display.Write(Messages); //get car color
                     }
-                    while(!this.m_Validtaion.IsValidCarColor(out returnValue));
+                    while(!this.m_Validation.IsValidCarColor(out color));
+                    returnValue = color;
                     break;
                 case "i_NumOfDoors":
-                    //returnValue = new Car.eNumOfDoors();
+                    Car.eNumOfDoors numOfDoors;
                     do
                     {
-                        Display.Write(this.m_Messages); //get car color
+                        Display.Write(Messages); //get car color
                     }
-                    while(!this.m_Validtaion.IsValidNumOfDoors(out returnValue));
+                    while(!this.m_Validation.IsValidNumOfDoors(out numOfDoors));
+                    returnValue = numOfDoors;
                     break;
 
                 case "i_EngineVolume":
+                    int engineVol;
                     do
                     {
-                        Display.Write(this.m_Messages); //get engine vol
+                        Display.Write(Messages); //get engine vol
                     }
-                    while(!this.m_Validtaion.IsValidInteger(out returnValue));
+                    while(!this.m_Validation.IsValidInteger(out engineVol));
+                    returnValue = engineVol;
                     break;
 
                 case "i_LicenseType":
+                    Motorcycle.eLicenseType licenseType;
                     do
                     {
-                        Display.Write(this.m_Messages); //get license type
+                        Display.Write(Messages); //get license type
                     }
-                    while(!this.m_Validtaion.IsValidStringNumber(out returnValue));
+                    while(!this.m_Validation.IsValidLicenseType(out licenseType));
+
+                    returnValue = licenseType;
                     break;
 
                 case "i_CargoVolume":
+                    float cargoVol;
                     do
                     {
-                        Display.Write(this.m_Messages); //get cargo volume
+                        Display.Write(Messages); //get cargo volume
                     }
-                    while(!this.m_Validtaion.IsValidFloat(out returnValue));
+                    while(!this.m_Validation.IsValidFloat(out cargoVol));
+
+                    returnValue = cargoVol;
                     break;
 
                 case "i_IsDangerous":
+                    bool isDan;
                     do
                     {
-                        Display.Write(this.m_Messages); //get is dangerous
+                        Display.Write(Messages); //get is dangerous
                     }
-                    while(!this.m_Validtaion.IsValidBoolAnswer(out returnValue));
+                    while(!this.m_Validation.IsValidBoolAnswer(out isDan));
+
+                    returnValue = isDan;
+                    break;
+
+                case "i_CurrentAmountOfEnergy":
+                    float currentAmount;
+                        do
+                        {
+                            Display.Write(Messages); //get current amount
+                        }
+                        while(!this.m_Validation.IsValidFloat(out currentAmount));
+
+                        returnValue = currentAmount;
+                        break;
+
+                case "i_fuelType":
+                    FuelEngine.eFuelType fuelType;
+                    do
+                    {
+                        Display.Write(Messages); //get fuelType
+                    }
+                    while(!this.m_Validation.IsValidFuelType(out fuelType));
+
+                    returnValue = fuelType;
+                    break;
+
+                case "i_CurrentAirPressure":
+                    float currentAir;
+                    do
+                    {
+                        Display.Write(Messages); //get current air
+                    }
+                    while(!this.m_Validation.IsValidFloat(out currentAir));
+
+                    returnValue = currentAir;
+                    break;
+
+                default:
+                    returnValue = null;
                     break;
             }
 

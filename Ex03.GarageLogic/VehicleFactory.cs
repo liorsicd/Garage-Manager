@@ -36,6 +36,8 @@ namespace Ex03.GarageLogic
                 case Vehicle.eTypeOfVehicle.Motorcycle:
                     this.m_Vehicle = new Motorcycle(i_VehicleType);
                     break;
+                default:
+                    throw new ArgumentException("not a valid vehicle type");
             }
 
             this.m_VehicleSetters = this.getSetters(this.m_Vehicle);
@@ -51,6 +53,8 @@ namespace Ex03.GarageLogic
                 case EnergySource.eEnergyTypes.Fuel:
                     this.m_Vehicle.EnergySource = new FuelEngine(EnergySource.eEnergyTypes.Fuel);
                     break;
+                default:
+                    throw new ArgumentException("not a valid energy source type");
             }
             
             this.m_Vehicle.EnergySource.InitMaxAmountOfEnergy(this.m_Vehicle);
@@ -58,9 +62,9 @@ namespace Ex03.GarageLogic
         }
 
 
-        private List<MethodInfo> getSetters(object i_obj)
+        private List<MethodInfo> getSetters(object i_Obj)
         {
-            MethodInfo[] allSetters = i_obj.GetType().GetMethods();
+            MethodInfo[] allSetters = i_Obj.GetType().GetMethods();
             List<MethodInfo> objSetters  = new List<MethodInfo>();
             
             foreach(MethodInfo setter in allSetters)

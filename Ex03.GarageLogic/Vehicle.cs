@@ -38,12 +38,12 @@ namespace Ex03.GarageLogic
             this.m_Model = i_Model;
         }
 
-        public void SetWheels(string i_ManufacturerName )
+        public void SetWheels(string i_ManufacturerName, float i_CurrentAirPressure )
         {
             Wheels = new List<Wheel>(k_NumOfWheels);
             for(int i = 0; i < k_NumOfWheels; i++)
             {
-                Wheels[i] = new Wheel(k_MaximumWheelPressure, i_ManufacturerName);
+                Wheels[i] = new Wheel(k_MaximumWheelPressure, i_ManufacturerName, i_CurrentAirPressure);
             }
         }
 

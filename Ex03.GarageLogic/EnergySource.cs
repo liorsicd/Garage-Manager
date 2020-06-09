@@ -46,8 +46,7 @@ namespace Ex03.GarageLogic
 
         public void SetCurrentAmountOfEnergy(float i_CurrentAmountOfEnergy)
         {
-
-            this.m_CurrentAmountOfEnergy = i_CurrentAmountOfEnergy;
+            FillEnergy(i_CurrentAmountOfEnergy);
         }
 
         public float MaxAmountOfEnergy
@@ -79,6 +78,10 @@ namespace Ex03.GarageLogic
             {
                 m_CurrentAmountOfEnergy += i_AmountOfEnergy;
                 returnValue = true;
+            }
+            else
+            {
+                throw new ValueOutOfRangeException(this.m_MaxAmountOfEnergy, 0);
             }
 
             return returnValue;

@@ -62,9 +62,13 @@ namespace Ex03.GarageLogic
 
             if(getVehicleInGarage(i_LicenseNumber, out VehicleInGarage currentVehicleInGarage))
             {
-                if((currentVehicleInGarage.Vehicle.EnergySource as FuelEngine).checkFuelType(i_Type))
+                if(((FuelEngine)currentVehicleInGarage.Vehicle.EnergySource).checkFuelType(i_Type))
                 {
                     returnValue = currentVehicleInGarage.Vehicle.EnergySource.FillEnergy(i_FuelToAdd);
+                }
+                else
+                {
+                    throw new ArgumentException("not correct fuel type");
                 }
             }
 
