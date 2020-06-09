@@ -64,10 +64,6 @@ namespace Ex03.GarageLogic
             {
                 return m_Vehicle;
             }
-            set
-            {
-                m_Vehicle = value;
-            }
         }
     }
 }

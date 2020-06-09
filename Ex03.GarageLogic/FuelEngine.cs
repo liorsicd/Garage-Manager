@@ -25,7 +25,7 @@ namespace Ex03.GarageLogic
         {
         }
 
-        public void SeteFuelType (eFuelType i_fuelType)
+        public void SetFuelType (eFuelType i_fuelType)
         {
             this.r_FuelType = i_fuelType;
         }

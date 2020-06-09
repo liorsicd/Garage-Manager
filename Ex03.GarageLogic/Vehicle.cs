@@ -32,6 +32,12 @@ namespace Ex03.GarageLogic
             this.r_Type = i_Type;
         }
 
+        public void SetVehicleParams(string i_LicenseNumber, string i_Model)
+        {
+            this.m_LicenseNumber = i_LicenseNumber;
+            this.m_Model = i_Model;
+        }
+
         public void SetWheels(string i_ManufacturerName )
         {
             Wheels = new List<Wheel>(k_NumOfWheels);
@@ -42,7 +48,7 @@ namespace Ex03.GarageLogic
         }
 
 
-        public void UpdateRemaningEnergy()
+        public void UpdateRemainingEnergy()
         {
             this.m_RemainingEnergyPercentage =
                 this.m_EnergySource.CurrentAmountOfEnergy / this.m_EnergySource.MaxAmountOfEnergy * 100;

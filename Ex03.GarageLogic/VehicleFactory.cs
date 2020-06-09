@@ -13,6 +13,8 @@ namespace Ex03.GarageLogic
     {
         private Vehicle m_Vehicle;
 
+        private VehicleInGarage m_VehicleInGarage;
+
         private List<MethodInfo> m_VehicleSetters;
         private List<MethodInfo> m_EnergySourceSetters;
 
@@ -36,27 +38,11 @@ namespace Ex03.GarageLogic
                     break;
             }
 
-            MethodInfo[] setters = this.m_Vehicle.GetType().GetMethods();
-            
-            foreach(MethodInfo setter in setters)
-            {
-                if(setter.Name.Contains("Set"))
-                {
-                    this.m_VehicleSetters.Add(setter);
-                }
-            }
+            this.m_VehicleSetters = this.getSetters(this.m_Vehicle);
         }
-
-        public void SetVehicleParams(string i_LicenseNumber, string i_Model)
-        {
-            this.m_Vehicle.LicenseNumber = i_LicenseNumber;
-            this.m_Vehicle.Model = i_Model;
-        }
-
 
         public void SetEnergySource(EnergySource.eEnergyTypes i_EnergySource)
         {
-            // maybe send type of vic to construtor
             switch(i_EnergySource)
             {
                 case EnergySource.eEnergyTypes.Electric:
@@ -67,36 +53,50 @@ namespace Ex03.GarageLogic
                     break;
             }
             
-            this.m_Vehicle.EnergySource.SetMaxAmountOfEnergy(this.m_Vehicle);
+            this.m_Vehicle.EnergySource.InitMaxAmountOfEnergy(this.m_Vehicle);
+            this.m_EnergySourceSetters = this.getSetters(this.m_Vehicle.EnergySource);
         }
 
 
-        // all inputs from user
-        public List<MethodInfo> getSetters()
+        private List<MethodInfo> getSetters(object i_obj)
         {
+            MethodInfo[] allSetters = i_obj.GetType().GetMethods();
+            List<MethodInfo> objSetters  = new List<MethodInfo>();
+            
+            foreach(MethodInfo setter in allSetters)
+            {
+                if(setter.Name.Contains("Set"))
+                {
+                    objSetters.Add(setter);
+                }
+            }
 
-            return this.m_Setters;
+            return objSetters;
         }
 
-        public void SetParams(MethodInfo i_Method, ParameterInfo[] i_Params)
+        public List<MethodInfo> GetVehicleSetters()
         {
-            i_Method.Invoke(this.m_Vehicle, i_Params);
+            return this.m_VehicleSetters;
         }
 
-
-        public Vehicle GetVehicle()
-        { 
-            return this.m_Vehicle;
+        public List<MethodInfo> GetEnergySourceSetters()
+        {
+            return this.m_EnergySourceSetters;
         }
-        
-        //
-        // public ParameterInfo[] GetParams(object i_Obj, MethodInfo i_Method)
-        // {
-        //     Type typeOfObj = i_Obj.GetType();
-        //     ParameterInfo[] parameters = i_Method.GetParameters();
-        //     return parameters;
-        // }
+
+        public void RunSetter(MethodInfo i_Setter, ParameterInfo[] i_Params)
+        {
+            i_Setter.Invoke(this.m_Vehicle, i_Params);
+        }
+
+        public void InitVehicleInGarage(string i_OwnerName, string i_PhoneNumber)
+        {
+            this.m_VehicleInGarage = new VehicleInGarage(i_OwnerName,i_PhoneNumber, this.m_Vehicle);
+        }
+
+        public VehicleInGarage GetVehicleInGarage()
+        {
+            return this.m_VehicleInGarage;
+        }
     }
-
-
 }

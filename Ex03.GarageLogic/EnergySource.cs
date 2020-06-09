@@ -42,11 +42,12 @@ namespace Ex03.GarageLogic
             {
                 return m_CurrentAmountOfEnergy;
             }
+        }
 
-            set
-            {
-                m_CurrentAmountOfEnergy = value;
-            }
+        public void SetCurrentAmountOfEnergy(float i_CurrentAmountOfEnergy)
+        {
+
+            this.m_CurrentAmountOfEnergy = i_CurrentAmountOfEnergy;
         }
 
         public float MaxAmountOfEnergy
@@ -55,14 +56,9 @@ namespace Ex03.GarageLogic
             {
                 return m_MaxAmountOfEnergy;
             }
-
-            set
-            {
-                m_MaxAmountOfEnergy = value;
-            }
         }
 
-        public void SetMaxAmountOfEnergy(Vehicle i_Vehicle)
+        public void InitMaxAmountOfEnergy(Vehicle i_Vehicle)
         {
             switch(m_EnergyType)
             {
