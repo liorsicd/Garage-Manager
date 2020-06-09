@@ -43,7 +43,7 @@ namespace Ex03_ConsoleUI
             string ownerName;
             do
             {
-                Display.Write(Messages.); //get name
+                Display.Write(Messages.GetMessage()); //get name
             }
             while(!this.m_Validation.IsValidName(out ownerName));
 
@@ -119,8 +119,6 @@ namespace Ex03_ConsoleUI
                 this.m_Factory.RunSetter(s, paramArr);
             }
         }
-
-
 
         private ParameterInfo getParameterFromUser(ParameterInfo i_Parameter)
         {
@@ -250,7 +248,6 @@ namespace Ex03_ConsoleUI
                         Display.Write(Messages); //get current air
                     }
                     while(!this.m_Validation.IsValidFloat(out currentAir));
-
                     returnValue = currentAir;
                     break;
 
