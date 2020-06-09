@@ -13,7 +13,8 @@ namespace Ex03.GarageLogic
     {
         private Vehicle m_Vehicle;
 
-        private List<MethodInfo> m_Setters;
+        private List<MethodInfo> m_VehicleSetters;
+        private List<MethodInfo> m_EnergySourceSetters;
 
         public Type GetVehicleType()
         {
@@ -41,7 +42,7 @@ namespace Ex03.GarageLogic
             {
                 if(setter.Name.Contains("Set"))
                 {
-                    this.m_Setters.Add(setter);
+                    this.m_VehicleSetters.Add(setter);
                 }
             }
         }
@@ -65,7 +66,7 @@ namespace Ex03.GarageLogic
                     this.m_Vehicle.EnergySource = new FuelEngine(EnergySource.eEnergyTypes.Fuel);
                     break;
             }
-
+            
             this.m_Vehicle.EnergySource.SetMaxAmountOfEnergy(this.m_Vehicle);
         }
 

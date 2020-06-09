@@ -21,12 +21,13 @@ namespace Ex03.GarageLogic
             : base(i_Type)
         {
         }
-        public void SetIsdangerous(bool i_Isdangerous)
+
+        public void SetIsdangerous(bool i_IsDangerous)
         {
-            b_IsDangerous = i_Isdangerous;
+            b_IsDangerous = i_IsDangerous;
         }
 
-        public  void SetCargoVolume(float i_CargoVolume)
+        public void SetCargoVolume(float i_CargoVolume)
         {
             this.m_CargoVolume = i_CargoVolume;
 
