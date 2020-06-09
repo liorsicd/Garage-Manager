@@ -11,7 +11,7 @@ namespace Ex03_ConsoleUI
 
     public class UserInputValidtaion
     {
-        public bool isValidVehicleType(out Vehicle.eTypeOfVehicle o_VehicleType)
+        public bool IsValidVehicleType(out Vehicle.eTypeOfVehicle o_VehicleType)
         {
             string vehicleType = Display.Read();
             o_VehicleType = (Vehicle.eTypeOfVehicle)Enum.Parse(typeof(Vehicle.eTypeOfVehicle), vehicleType);
