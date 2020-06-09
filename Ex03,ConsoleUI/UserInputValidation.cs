@@ -16,11 +16,11 @@ namespace Ex03_ConsoleUI
             
             string vehicleType = Display.Read();
             bool returnValue = vehicleType.Length > 0;
-            o_VehicleType = (Vehicle.eTypeOfVehicle)Enum.Parse(typeof(Vehicle.eTypeOfVehicle), vehicleType);
+          
             
-            if(!Enum.IsDefined(typeof(Vehicle.eTypeOfVehicle), vehicleType))
+            if(!Enum.TryParse(vehicleType, out o_VehicleType))
             {
-                Display.Write(i_Msg: Messages.GetMessage(Messages.eErrorMessagesToUser.InvalidInput));
+                Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidVehicleType));
                 returnValue = false;
             }
             
@@ -37,7 +37,7 @@ namespace Ex03_ConsoleUI
                 if(!char.IsLetter(letter))
                 {
                     returnValue = false;
-                    Messages.GetMessage(Messages.eMessagesToUser.InvalidName);
+                    Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidName));
                 }
             }
 
@@ -52,7 +52,7 @@ namespace Ex03_ConsoleUI
             {
                 if(!char.IsDigit(letter))
                 {
-                    Messages.GetMessage(Messages.eMessagesToUser.InvalidInput);
+                    Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidStringNum));
                     returnValue = false;
                     break;
                 }
@@ -65,11 +65,10 @@ namespace Ex03_ConsoleUI
         {
             string energySource = Display.Read();
             bool returnValue = energySource.Length > 0;
-            o_EnergySource = (EnergySource.eEnergyTypes)Enum.Parse(typeof(EnergySource.eEnergyTypes), energySource);
-            
-            if (!Enum.IsDefined(typeof(EnergySource.eEnergyTypes), energySource))
+
+            if (!Enum.TryParse(energySource, out o_EnergySource))
             {
-                Display.Write(i_Msg: Messages.GetMessage(Messages.eMessagesToUser.InvalidEnergy));
+                Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidEnergy));
                 returnValue = false;
             }
 
@@ -80,11 +79,10 @@ namespace Ex03_ConsoleUI
         {
             string color = Display.Read();
             bool returnValue = color.Length > 0;
-            o_CarColor = (Car.eCarColor)Enum.Parse(typeof(Car.eCarColor), color);
             
-            if (!Enum.IsDefined(typeof(Car.eCarColor), color))
+            if (!Enum.TryParse(color, out o_CarColor))
             {
-                Display.Write(i_Msg: Messages.GetMessage(Messages.eMessagesToUser.InvalidInput));
+                Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidColor));
                 returnValue = false;
             }
 
@@ -95,11 +93,10 @@ namespace Ex03_ConsoleUI
         {
             string doors = Display.Read();
             bool returnValue = doors.Length > 0;
-            o_CarDoors = (Car.eNumOfDoors)Enum.Parse(typeof(Car.eNumOfDoors), doors);
-            
-            if (!Enum.IsDefined(typeof(Car.eNumOfDoors), doors))
+
+            if(!Enum.TryParse(doors, out o_CarDoors))
             {
-                Display.Write(i_Msg: Messages.GetMessage(Messages.eMessagesToUser.InvalidInput));
+                Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidNumDoors));
                 returnValue = false;
             }
 
@@ -110,11 +107,10 @@ namespace Ex03_ConsoleUI
         {
             string fuelType = Display.Read();
             bool returnValue = fuelType.Length > 0;
-            o_FuelType = (FuelEngine.eFuelType)Enum.Parse(typeof(FuelEngine.eFuelType), fuelType);
             
-            if (!Enum.IsDefined(typeof(FuelEngine.eFuelType), fuelType))
+            if (!Enum.TryParse(fuelType, out o_FuelType))
             {
-                Display.Write(i_Msg: Messages.GetMessage(Messages.eMessagesToUser.InvalidInput));
+                Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidFuelType));
                 returnValue = false;
             }
 
@@ -125,11 +121,10 @@ namespace Ex03_ConsoleUI
         {
             string licenseType = Display.Read();
             bool returnValue = licenseType.Length > 0;
-            o_LicenseType = (Motorcycle.eLicenseType)Enum.Parse(typeof(Motorcycle.eLicenseType), licenseType);
-            
-            if (!Enum.IsDefined(typeof(Motorcycle.eLicenseType), licenseType))
+
+            if (!Enum.TryParse(licenseType, out o_LicenseType))
             {
-                Display.Write(i_Msg: Messages.GetMessage(Messages.eMessagesToUser.InvalidInput));
+                Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidLicenseType));
                 returnValue = false;
             }
 
@@ -140,11 +135,11 @@ namespace Ex03_ConsoleUI
         public bool IsValidInteger(out int o_ValidInteger)
         {
             string userInput = Display.Read();
-            bool returnValue = userInput > 0;
+            bool returnValue = userInput.Length > 0;
             if (!int.TryParse(userInput, out o_ValidInteger))
             {
-                Messages.GetMessage(Messages.eMessagesToUser.InvalidInput);
-                returnValue = false;
+               Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
+               returnValue = false;
             }
 
             return returnValue;
@@ -158,7 +153,7 @@ namespace Ex03_ConsoleUI
             bool returnValue = userInput.Length > 0;
             if(!float.TryParse(userInput, out o_ValidFloat))
             {
-                Messages.GetMessage(Messages.eMessagesToUser.InvalidInput);
+                Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
                 returnValue = false;
             }
 
@@ -173,7 +168,7 @@ namespace Ex03_ConsoleUI
             
             if(!userInput.Equals("Y") && !userInput.Equals("N"))
             {
-                Messages.GetMessage(Messages.eMessagesToUser.InvalidInput);
+                Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
                 returnValue = false;
             }
 
@@ -184,7 +179,6 @@ namespace Ex03_ConsoleUI
 
             return returnValue;
         }
-
     }
 }
 

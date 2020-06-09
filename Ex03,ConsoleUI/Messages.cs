@@ -9,25 +9,23 @@ namespace Ex03_ConsoleUI
     public class Messages
     {
         private static string[] m_MessagesAddVehicle = 
-            {
-                //menu
-            @"Welcome to the garage. How we can serve you today?",
-            "Please enter license number",
+            { 
+                "Please enter license number",
             "Please enter owner name",
             "Please enter owner phone number",
-            "Please enter owner vehicle type",
-            "Please enter owner type of engine",
-            "Please enter owner vehicle model",
-            "Please enter owner vehicle energy source",
-            "Please enter owner wheel ManufacturerName",
-            "Please enter owner car color",
-            "Please enter owner car num of doors",
-            "Please enter owner engine volume",
-            "Please enter owner license type",
-            "Please enter owner cargo volume",
+            "Please enter vehicle type",
+            "Please enter vehicle energy source",
+            "Please enter vehicle model",
+            "Please enter wheel ManufacturerName",
+            "Please enter car color",
+            "Please enter car num of doors",
+            "Please enter engine volume",
+            "Please enter license type",
+            "Please enter cargo volume",
             "Please enter yes if carrying dangerous materials, else no", "Please enter owner current amount of energy",
-            "Please enter owner fuel type",
-            "Please enter owner current air pressure"
+            "Please enter fuel type",
+            "Please enter current air pressure",
+            "Please enter current energy amount"
             };
 
         private static string[] m_ErrorMessagesToUser =
@@ -58,24 +56,22 @@ namespace Ex03_ConsoleUI
 
         public enum eAddVehicle
         {
-            WelcomeUser = 0,
-            EnterLicenseNumber = 1,
-            OwnerName = 2,
-            PhoneNumber = 3,
-            VehicleType = 4,
-            TypeOfEngine = 5,
-            VehicleModel = 6,
-            EnergySource = 7,
-            WheelManufacturerName = 8,
-            CarColor = 9,
-            NumOfDoors = 10,
-            EngineVolume = 11,
-            LicenseType = 12,
-            CargoVolume = 13,
-            IsDangerous = 14,
-            FuelType = 15,
-            CurrentAirPressure = 16,
-            CurrentEnergyAmount = 17
+            EnterLicenseNumber,
+            OwnerName,
+            PhoneNumber,
+            VehicleType,
+            EnergySource,
+            VehicleModel,
+            WheelManufacturerName,
+            CarColor,
+            NumOfDoors,
+            EngineVolume,
+            LicenseType,
+            CargoVolume,
+            IsDangerous,
+            FuelType,
+            CurrentAirPressure,
+            CurrentEnergyAmount
         }
 
 

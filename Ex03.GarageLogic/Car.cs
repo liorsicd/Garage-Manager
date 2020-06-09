@@ -23,9 +23,9 @@ namespace Ex03.GarageLogic
         {
         }
 
-        public void SetNumOfDoors(eNumOfDoors i_numOfDoors)
+        public void SetNumOfDoors(eNumOfDoors i_NumOfDoors)
         {
-            this.m_NumOfDoors = i_numOfDoors;
+            this.m_NumOfDoors = i_NumOfDoors;
         }
 
         public void SetColor(eCarColor i_CarColor)

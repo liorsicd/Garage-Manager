@@ -37,7 +37,7 @@ namespace Ex03.GarageLogic
 
 
 
-        public void setLicenseType(eLicenseType i_LicenseType)
+        public void SetLicenseType(eLicenseType i_LicenseType)
         {
             this.m_LicenseType = i_LicenseType;
         }

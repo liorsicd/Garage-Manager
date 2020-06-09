@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ex03_ConsoleUI
 {
+    using Ex03.GarageLogic;
+
     public class Display
     {
         public static void Write(string i_Msg)
@@ -16,6 +18,15 @@ namespace Ex03_ConsoleUI
         public static string Read()
         {
             return Console.ReadLine();
+        }
+
+        public static void WriteEnum(Type i_EnumType)
+        {
+            Array arr = Enum.GetValues(i_EnumType);
+            foreach(object option in arr)
+            {
+                Write(string.Format("{0}. {1}", ((int)option).ToString(), option.ToString()));
+            }
         }
 
     }
