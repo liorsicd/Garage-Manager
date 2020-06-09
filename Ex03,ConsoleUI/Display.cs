@@ -8,12 +8,12 @@ namespace Ex03_ConsoleUI
 {
     public class Display
     {
-        public void Write(string i_Msg)
+        public static void Write(string i_Msg)
         {
             Console.WriteLine(i_Msg);
         }
 
-        public string Read()
+        public static string Read()
         {
             return Console.ReadLine();
         }
