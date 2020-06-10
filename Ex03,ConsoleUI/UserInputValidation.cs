@@ -38,6 +38,7 @@ namespace Ex03_ConsoleUI
                 {
                     returnValue = false;
                     Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidName));
+                    break;
                 }
             }
 

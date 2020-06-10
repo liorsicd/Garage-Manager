@@ -18,6 +18,8 @@ namespace Ex03.GarageLogic
         public Truck(Vehicle.eTypeOfVehicle i_Type)
             : base(i_Type)
         {
+            base.k_NumOfWheels = k_NumOfWheels;
+            base.k_MaximumWheelPressure = k_MaximumWheelPressure;
         }
 
         public void SetIsdangerous(bool i_IsDangerous)

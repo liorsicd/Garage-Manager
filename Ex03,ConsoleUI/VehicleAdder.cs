@@ -52,7 +52,7 @@ namespace Ex03_ConsoleUI
             {
                 Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.PhoneNumber)); 
             }
-            while(!this.m_Validation.IsValidName(out phoneNumber));
+            while(!this.m_Validation.IsValidStringNumber(out phoneNumber));
 
 
 
@@ -105,6 +105,7 @@ namespace Ex03_ConsoleUI
             }
             
             runtObjectsSetters(this.m_Factory.GetEnergySourceSetters(), typeof(EnergySource));
+            this.m_Factory.GetVehicle().UpdateRemainingEnergy();
         }
 
 
@@ -113,18 +114,20 @@ namespace Ex03_ConsoleUI
             foreach(MethodInfo s in i_Setters)
             {
                 ParameterInfo[] paramArr = s.GetParameters();
+                object[] returnParams = new object[paramArr.Length];
                 for(int i = 0; i < paramArr.Length; i++)
                 {
-                    paramArr[i] = this.getParameterFromUser(paramArr[i]);
+                    returnParams[i] = this.getParameterFromUser(paramArr[i]);
                 }
 
-                this.m_Factory.RunSetter(s, paramArr, i_Type);
+                this.m_Factory.RunSetter(s, returnParams, i_Type); 
             }
         }
 
-        private ParameterInfo getParameterFromUser(ParameterInfo i_Parameter)
+        private Object getParameterFromUser(ParameterInfo i_Parameter)
         {
             object returnValue;
+            
             switch(i_Parameter.Name)
             {
                 case "i_LicenseNumber":
@@ -261,8 +264,8 @@ namespace Ex03_ConsoleUI
                     returnValue = null;
                     break;
             }
-            
-            return returnValue as ParameterInfo;
+
+            return returnValue;
         }
     }
 

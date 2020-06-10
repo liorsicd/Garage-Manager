@@ -18,10 +18,6 @@ namespace Ex03.GarageLogic
         private List<MethodInfo> m_VehicleSetters;
         private List<MethodInfo> m_EnergySourceSetters;
 
-        public Type GetVehicleType()
-        {
-            return this.m_Vehicle.GetType();
-        }
 
         public void CreateVehicle(Vehicle.eTypeOfVehicle i_VehicleType)
         {
@@ -89,7 +85,7 @@ namespace Ex03.GarageLogic
         }
 
 
-        public void RunSetter(MethodInfo i_Setter, ParameterInfo[] i_Params, Type i_Type)
+        public void RunSetter(MethodInfo i_Setter, Object[] i_Params, Type i_Type)
         {
             if(i_Type == typeof(Vehicle))
             {
@@ -110,5 +106,12 @@ namespace Ex03.GarageLogic
         {
             return this.m_VehicleInGarage;
         }
+
+        public Vehicle GetVehicle()
+        {
+            return this.m_Vehicle;
+        }
+
+
     }
 }

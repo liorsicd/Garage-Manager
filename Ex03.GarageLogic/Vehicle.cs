@@ -40,10 +40,10 @@ namespace Ex03.GarageLogic
 
         public void SetWheels(string i_ManufacturerName, float i_CurrentAirPressure)
         {
-            Wheels = new List<Wheel>(k_NumOfWheels);
+            this.m_Wheels = new List<Wheel>(k_NumOfWheels);
             for(int i = 0; i < k_NumOfWheels; i++)
             {
-                Wheels[i] = new Wheel(k_MaximumWheelPressure, i_ManufacturerName, i_CurrentAirPressure);
+                this.m_Wheels.Add(new Wheel(k_MaximumWheelPressure, i_ManufacturerName, i_CurrentAirPressure));
             }
         }
 

@@ -19,6 +19,8 @@ namespace Ex03.GarageLogic
         public Motorcycle(Vehicle.eTypeOfVehicle i_Type)
             : base(i_Type)
         {
+            base.k_NumOfWheels = k_NumOfWheels;
+            base.k_MaximumWheelPressure = k_MaximumWheelPressure;
         }
 
         public enum eLicenseType
