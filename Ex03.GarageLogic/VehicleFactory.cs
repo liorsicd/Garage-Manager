@@ -88,14 +88,21 @@ namespace Ex03.GarageLogic
             return this.m_EnergySourceSetters;
         }
 
-        public void RunSetter(MethodInfo i_Setter, ParameterInfo[] i_Params)
+        public void RunVehicleSetter(MethodInfo i_Setter, ParameterInfo[] i_Params)
         {
             i_Setter.Invoke(this.m_Vehicle, i_Params);
         }
 
-        public void InitVehicleInGarage(string i_OwnerName, string i_PhoneNumber)
+        public void RunSetter(MethodInfo i_Setter, ParameterInfo[] i_Params, Type i_Type)
         {
-            this.m_VehicleInGarage = new VehicleInGarage(i_OwnerName,i_PhoneNumber, this.m_Vehicle);
+            if(i_Type == typeof(Vehicle))
+            {
+                i_Setter.Invoke(this.m_Vehicle, i_Params);
+            }
+            else if(i_Type == typeof(EnergySource))
+            {
+                i_Setter.Invoke(this.m_Vehicle.EnergySource, i_Params);
+            }
         }
 
         public VehicleInGarage GetVehicleInGarage()

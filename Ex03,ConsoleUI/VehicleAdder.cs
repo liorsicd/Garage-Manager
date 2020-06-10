@@ -80,7 +80,7 @@ namespace Ex03_ConsoleUI
             }
             
 
-            runtObjectsSetters(this.m_Factory.GetVehicleSetters());
+            runtObjectsSetters(this.m_Factory.GetVehicleSetters(), typeof(Vehicle));
 
         }
 
@@ -104,11 +104,11 @@ namespace Ex03_ConsoleUI
                 this.setEnergySourceParams();
             }
             
-            runtObjectsSetters(this.m_Factory.GetEnergySourceSetters());
+            runtObjectsSetters(this.m_Factory.GetEnergySourceSetters(), typeof(EnergySource));
         }
 
 
-        private void runtObjectsSetters(List<MethodInfo> i_Setters)
+        private void runtObjectsSetters(List<MethodInfo> i_Setters, Type i_Type)
         {
             foreach(MethodInfo s in i_Setters)
             {
@@ -118,7 +118,7 @@ namespace Ex03_ConsoleUI
                     paramArr[i] = this.getParameterFromUser(paramArr[i]);
                 }
 
-                this.m_Factory.RunSetter(s, paramArr);
+                this.m_Factory.RunSetter(s, paramArr, i_Type);
             }
         }
 
