@@ -25,8 +25,13 @@ namespace Ex03_ConsoleUI
             Array arr = Enum.GetValues(i_EnumType);
             foreach(object option in arr)
             {
-                Write(string.Format("{0}. {1}", ((int)option).ToString(), option.ToString()));
+                Write(string.Format("{1}--{0}", option, (int)option));
             }
+        }
+
+        public static void Clear()
+        {
+            Console.Clear();
         }
 
     }

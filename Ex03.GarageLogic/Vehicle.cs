@@ -10,11 +10,11 @@ namespace Ex03.GarageLogic
     {
         public enum eTypeOfVehicle
         {
-            Car,
+            Car = 0,
 
-            Motorcycle,
+            Motorcycle = 1,
 
-            Truck,
+            Truck = 2,
         }
 
         protected int k_NumOfWheels;

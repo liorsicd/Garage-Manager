@@ -37,10 +37,10 @@ namespace Ex03.GarageLogic
 
         public enum eCarColor
         {
-            Red,
-            Black,
-            White,
-            Silver
+            Red = 0,
+            Black = 1,
+            White = 2,
+            Silver = 3
         }
 
         public override float GetMaxFuelAmount()
