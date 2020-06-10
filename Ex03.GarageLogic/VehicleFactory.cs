@@ -88,10 +88,6 @@ namespace Ex03.GarageLogic
             return this.m_EnergySourceSetters;
         }
 
-        public void RunVehicleSetter(MethodInfo i_Setter, ParameterInfo[] i_Params)
-        {
-            i_Setter.Invoke(this.m_Vehicle, i_Params);
-        }
 
         public void RunSetter(MethodInfo i_Setter, ParameterInfo[] i_Params, Type i_Type)
         {
@@ -103,6 +99,11 @@ namespace Ex03.GarageLogic
             {
                 i_Setter.Invoke(this.m_Vehicle.EnergySource, i_Params);
             }
+        }
+
+        public void InitVehicleInGarage(string i_OwnerName, string i_PhoneNumber)
+        {
+            this.m_VehicleInGarage = new VehicleInGarage(i_OwnerName,i_PhoneNumber, this.m_Vehicle);
         }
 
         public VehicleInGarage GetVehicleInGarage()
