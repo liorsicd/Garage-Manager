@@ -24,11 +24,21 @@ namespace Ex03.GarageLogic
         public void InsertVehicle(VehicleInGarage i_VehicleInGarage)
         {
             this.m_VehiclesInGarages.Add(i_VehicleInGarage.Vehicle.LicenseNumber, i_VehicleInGarage);
+            ChangeVehicleStatus(i_VehicleInGarage.Vehicle.LicenseNumber, VehicleInGarage.eStatus.InRepair);
         }
 
-        public List<string> GetListOfVehiclesInGarage()
+        public List<string> GetListOfVehiclesInGarage(VehicleInGarage.eStatus i_status)
         {
-            return new List<string>(this.m_VehiclesInGarages.Keys);
+            List<string> list = new List<string>();
+            foreach (KeyValuePair<string, VehicleInGarage> v in this.m_VehiclesInGarages)
+            {
+                if(v.Value.Status == i_status)
+                {
+                    list.Add(v.Key);
+                }
+            }
+
+            return list;
         }
 
         private bool getVehicleInGarage(string i_LicenseNumber, out VehicleInGarage i_CurrentVehicleInGarage)
@@ -36,24 +46,31 @@ namespace Ex03.GarageLogic
             return this.m_VehiclesInGarages.TryGetValue(i_LicenseNumber, out i_CurrentVehicleInGarage);
         }
 
-        public void ChangeVehicleStatus(string i_LicenseNumber, VehicleInGarage.eStatus i_Status)
+        public bool ChangeVehicleStatus(string i_LicenseNumber, VehicleInGarage.eStatus i_Status)
         {
-            
+            bool returnValue = false;
             if(getVehicleInGarage(i_LicenseNumber, out VehicleInGarage currentVehicleInGarage))
             {
                 currentVehicleInGarage.Status = i_Status;
+                returnValue = true;
             }
+
+            return returnValue;
         }
 
-        public void AddAir(string i_LicenseNumber)
+        public bool AddAir(string i_LicenseNumber)
         {
+            bool returnValue = false;
             if(getVehicleInGarage(i_LicenseNumber, out VehicleInGarage currentVehicleInGarage))
             {
+                returnValue = true;
                 foreach(Wheel w in currentVehicleInGarage.Vehicle.Wheels)
                 {
                     w.AddAir(w.MaxAirPressure - w.CurrentAirPressure);
                 }
             }
+
+            return returnValue;
         }
 
         public bool AddFuel(string i_LicenseNumber, float i_FuelToAdd, FuelEngine.eFuelType i_Type)
@@ -90,12 +107,14 @@ namespace Ex03.GarageLogic
             return returnValue;
         }
 
-        public string ShowVehicleDetails(string i_LicenseNumber)
+        public bool ShowVehicleDetails(string i_LicenseNumber, out string o_Details)
         {
-            string returnValue = "Vehicle not found";
+            o_Details = " ";
+            bool returnValue = false;
             if(getVehicleInGarage(i_LicenseNumber, out VehicleInGarage currentVehicleInGarage))
             {
-                returnValue = string.Format(
+                returnValue = true;
+                o_Details = string.Format(
                     "License Number: {1}{0} Owner Name: {2}{0} Status: {3}{0}{4}",
                     Environment.NewLine,
                     currentVehicleInGarage.Vehicle.LicenseNumber,

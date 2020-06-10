@@ -32,99 +32,173 @@ namespace Ex03_ConsoleUI
 
         public void ChargeElectricVehicle()
         {
-            string licenseNumber;
-            float minToCharge = 0;
-            do
+            bool success = false;
+            while(!success)
             {
-                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
-                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.TimeToCharge));
-            }
-            while (this.m_userInputValidation.IsValidStringNumber(out licenseNumber)
-                   && this.m_userInputValidation.IsValidFloat(out minToCharge));
-            {
-                this.m_Garage.Recharge(licenseNumber, minToCharge);
-            }
-        }
+                string licenseNumber;
+                do
+                {
+                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
+                }
+                while(this.m_userInputValidation.IsValidStringNumber(out licenseNumber));
 
+
+
+                float minToCharge = 0;
+                do
+                {
+                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.TimeToCharge));
+                }
+                while(this.m_userInputValidation.IsValidFloat(out minToCharge));
+
+                if(!m_Garage.Recharge(licenseNumber, minToCharge))
+                {
+                    Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
+                }
+                else
+                {
+                    success = true;
+                }
+            }
+
+        }
 
         public void RefuelVehicle()
         {
-            FuelEngine.eFuelType fuelType;
-            string licenseNumber = string.Empty;
-            float amount = 0;
-            do
+            bool success = false;
+            while(!success)
             {
-                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
-                Display.WriteEnum(typeof(FuelEngine.eFuelType));
-                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.FuelToAdd));
-            }
-            while(this.m_userInputValidation.IsValidFuelType(out fuelType)
-                  && this.m_userInputValidation.IsValidStringNumber(out licenseNumber)
-                  && this.m_userInputValidation.IsValidFloat(out amount));
-            {
-                this.m_Garage.AddFuel(licenseNumber, amount, fuelType);
+
+                object fuelType;
+                string licenseNumber = string.Empty;
+                float amount = 0;
+                do
+                {
+                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
+
+                }
+                while(this.m_userInputValidation.IsValidOption(typeof(FuelEngine.eFuelType), out fuelType));
+
+                do
+                {
+                    Display.WriteEnum(typeof(FuelEngine.eFuelType));
+                }
+                while(this.m_userInputValidation.IsValidStringNumber(out licenseNumber));
+
+
+                do
+                {
+                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.FuelToAdd));
+                }
+                while(this.m_userInputValidation.IsValidFloat(out amount));
+
+                if(!m_Garage.AddFuel(licenseNumber, amount, (FuelEngine.eFuelType)fuelType))
+                {
+                    Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
+                }
+                else
+                {
+                    success = true;
+                }
             }
         }
 
         public void ChangeStatus()
         {
-
-            VehicleInGarage.eStatus status = VehicleInGarage.eStatus.OutOfGarage;
-            string licenseNumber;
-
-            do
+            bool success = false;
+            while(!success)
             {
-                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.ChangeStatus));
-                Display.WriteEnum(typeof(VehicleInGarage.eStatus));
-                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
+                object status;
+                string licenseNumber;
 
-            }
-            while(this.m_userInputValidation.IsValidStringNumber(out licenseNumber)
-                  && this.m_userInputValidation.IsValidStatus(out status));
-            {
-                this.m_Garage.ChangeVehicleStatus(licenseNumber, status);
+                do
+                {
+                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
+
+                }
+                while(this.m_userInputValidation.IsValidStringNumber(out licenseNumber));
+
+                do
+                {
+                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.ChangeStatus));
+                    Display.WriteEnum(typeof(VehicleInGarage.eStatus));
+                }
+                while(this.m_userInputValidation.IsValidOption(typeof(VehicleInGarage.eStatus), out status));
+
+                if(!this.m_Garage.ChangeVehicleStatus(licenseNumber, (VehicleInGarage.eStatus)status))
+                {
+                    Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
+                }
+                else
+                {
+                    success = true;
+                }
             }
         }
 
-        //??
         public void DisplayLicenseNumbersList()
         {
-            List<string> licenseNumbers;
+            object status;
+            Display.Write(Messages); //// choose status of vehicle
+            do
+            { 
+                Display.WriteEnum(typeof(VehicleInGarage.eStatus));
 
-                this.m_Garage.GetListOfVehiclesInGarage();
+            }
+            while(!this.m_userInputValidation.IsValidOption(typeof(VehicleInGarage.eStatus), out status));
+
+            Display.Write(this.m_Garage.GetListOfVehiclesInGarage((VehicleInGarage.eStatus)status).ToString());
         }
-
-
 
 
 
         public void InflateTires()
         {
-            string licenseNumber;
-            do
+            bool success = false;
+            while(!success)
             {
-                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
-            }
-            while (this.m_userInputValidation.IsValidStringNumber(out licenseNumber));
-            {
-                this.m_Garage.AddAir(licenseNumber);
+                string licenseNumber;
+                do
+                {
+                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
+                }
+                while(!this.m_userInputValidation.IsValidStringNumber(out licenseNumber));
+
+                if(!this.m_Garage.AddAir(licenseNumber))
+                {
+                    Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
+                }
+                else
+                {
+                    success = true;
+                }
             }
         }
 
-
-
-
         public void PrintVehicleDetails()
         {
-            string licenseNumber;
-            do
+            bool success = false;
+            string details = null;
+            while(!success)
             {
-                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
+                string licenseNumber;
+                do
+                {
+                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
+                }
+                while(this.m_userInputValidation.IsValidStringNumber(out licenseNumber));
+
+                
+                if(!this.m_Garage.ShowVehicleDetails(licenseNumber, out details))
+                {
+                    Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
+                }
+                else
+                {
+                    success = true;
+                }
             }
-            while(this.m_userInputValidation.IsValidStringNumber(out licenseNumber));
-            {
-                this.m_Garage.ShowVehicleDetails(licenseNumber);
-            }
+            Display.Write(details);
         }
     }
 }
