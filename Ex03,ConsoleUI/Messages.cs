@@ -10,7 +10,7 @@ namespace Ex03_ConsoleUI
     {
         private static string[] m_MessagesAddVehicle = 
             { 
-                "Please enter license number",
+            "Please enter license number",
             "Please enter owner name",
             "Please enter owner phone number",
             "Please enter vehicle type",
@@ -22,10 +22,13 @@ namespace Ex03_ConsoleUI
             "Please enter engine volume",
             "Please enter license type",
             "Please enter cargo volume",
-            "Please enter yes if carrying dangerous materials, else no", "Please enter owner current amount of energy",
+            "Please enter yes if carrying dangerous materials, else no", 
+            "Please enter owner current amount of energy",
             "Please enter fuel type",
             "Please enter current air pressure",
-            "Please enter current energy amount"
+            "Please enter amount Of liters to fuel",
+            "Please enter the amount of time to charge",
+            "Please change the status of a vehicle"
             };
 
         private static string[] m_ErrorMessagesToUser =
@@ -41,18 +44,8 @@ namespace Ex03_ConsoleUI
             "Invalid color, please try again",
             "Invalid license type, please try again",
             "Not valid energy, please try again",
+            "Not valid status, please try again",
             };
-
-        private static string[] m_MessagesServiceUser =
-            {
-                "Refueled your vehicle successfully.",
-                "Recharged your vehicle successfully.",
-                "Inflated your wheels to maximum.",
-                "Please enter amount to add",
-                "Thank you for using the garage management program, Bye Bye!"
-            };
-
-
 
         public enum eAddVehicle
         {
@@ -69,9 +62,12 @@ namespace Ex03_ConsoleUI
             LicenseType,
             CargoVolume,
             IsDangerous,
+            CurrentEnergyAmount,
             FuelType,
             CurrentAirPressure,
-            CurrentEnergyAmount
+            FuelToAdd,
+            TimeToCharge,
+            ChangeStatus
         }
 
 
@@ -86,17 +82,14 @@ namespace Ex03_ConsoleUI
             InvalidFuelType = 6,
             InvalidNumDoors = 7,
             InvalidColor = 8,
-            InvalidLicenseType = 9
-    }
-
-
+            InvalidLicenseType = 9,
+            InvalidStatus = 10
+        }
 
         public static string GetErrorMessage(eErrorMessagesToUser i_Messages)
     {
         return m_ErrorMessagesToUser[(int)i_Messages];
     }
-
-
 
         public static string GetMessageAddVehicle(eAddVehicle i_Messages)
         {

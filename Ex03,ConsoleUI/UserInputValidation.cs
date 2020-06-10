@@ -89,6 +89,22 @@ namespace Ex03_ConsoleUI
             return returnValue;
         }
 
+
+
+        public bool IsValidStatus(out VehicleInGarage.eStatus o_Status)
+        {
+            string status = Display.Read();
+            bool returnValue = status.Length > 0;
+
+            if (!Enum.TryParse(status, out o_Status))
+            {
+                Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.));
+                returnValue = false;
+            }
+
+            return returnValue;
+        }
+
         public bool IsValidNumOfDoors(out Car.eNumOfDoors o_CarDoors)
         {
             string doors = Display.Read();
