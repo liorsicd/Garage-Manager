@@ -39,7 +39,7 @@ namespace Ex03_ConsoleUI
                 Display.WriteStringArray(Messages.GetMenuMessages());
             }
             while(!this.m_UserInputValidation.IsValidOption(typeof(eMenu), out choice));
-
+            Display.Clear();
             switch((eMenu)choice)
             {
                 case eMenu.AddVehicle:

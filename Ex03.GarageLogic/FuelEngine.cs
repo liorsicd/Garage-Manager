@@ -37,7 +37,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("{1} Fuel Type: {2}{0}", Environment.NewLine, base.ToString(), this.m_FuelType);
+            return string.Format("{1}Fuel Type: {2}{0}", Environment.NewLine, base.ToString(), this.m_FuelType);
         }
     }
 }

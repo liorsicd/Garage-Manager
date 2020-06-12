@@ -25,21 +25,29 @@ namespace Ex03_ConsoleUI
             this.m_IsReady = false;
         }
 
-        public void Start()
+        public void Start(string i_LicenseNumber)
         {
             setVehicleParams();
             setEnergySourceParams();
+            SetVehicleLicenseNumber(i_LicenseNumber);
             setVehicleInGarageParams();
+            
             m_IsReady = true;
         }
-        
+
         public VehicleInGarage GetNewVehicle()
         {
             return this.m_IsReady ? this.m_Factory.GetVehicleInGarage() : null;
         }
 
+        public void SetVehicleLicenseNumber(string i_LicenseNumber)
+        {
+            this.m_Factory.SetLicenseNumber(i_LicenseNumber);
+        }
+
         private void setVehicleInGarageParams()
         {
+            Display.Clear();
             string ownerName;
             do
             {
@@ -48,6 +56,7 @@ namespace Ex03_ConsoleUI
             while(!this.m_Validation.IsValidName(out ownerName));
 
             string phoneNumber;
+            Display.Clear();
             do
             {
                 Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.PhoneNumber)); 
@@ -61,6 +70,7 @@ namespace Ex03_ConsoleUI
 
         private void setVehicleParams()
         {
+            Display.Clear();
             object vehicleType;
             do
             {
@@ -76,6 +86,7 @@ namespace Ex03_ConsoleUI
             catch(ArgumentException e)
             {
                 Display.Write(e.Message);
+                Display.Wait();
                 this.setVehicleParams();
             }
             
@@ -86,6 +97,7 @@ namespace Ex03_ConsoleUI
 
         private void setEnergySourceParams()
         {
+            Display.Clear();
             object energyType;
             do
             {
@@ -101,6 +113,7 @@ namespace Ex03_ConsoleUI
             catch(ArgumentException e)
             {
                 Display.Write(e.Message);
+                Display.Wait();
                 this.setEnergySourceParams();
             }
             
@@ -118,24 +131,24 @@ namespace Ex03_ConsoleUI
                 GetParameters:
                     for(int i = 0; i < paramArr.Length; i++)
                     {
+                        Display.Clear();
                         returnParams[i] = this.getParameterFromUser(paramArr[i]);
                     }
 
-                try
-                {
-                    this.m_Factory.RunSetter(s, returnParams, i_Type);
-                }
-                catch (Exception e)
-                {
-                    Display.Write(e.InnerException.Message);
-                    goto GetParameters;
-                }
-                
-
+                    try
+                    {
+                        this.m_Factory.RunSetter(s, returnParams, i_Type);
+                    }
+                    catch(Exception e)
+                    {
+                        Display.Write(e.InnerException.Message);
+                        Display.Wait();
+                        goto GetParameters;
+                    }
             }
         }
 
-        private Object getParameterFromUser(ParameterInfo i_Parameter)
+        private object getParameterFromUser(ParameterInfo i_Parameter)
         {
             object returnValue;
             

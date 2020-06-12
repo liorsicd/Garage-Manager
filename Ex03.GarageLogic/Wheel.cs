@@ -51,7 +51,7 @@ namespace Ex03.GarageLogic
         {
             if (i_AirToAdd + m_CurrentAirPressure > r_MaxAirPressure || i_AirToAdd < 0)
             {
-                throw new ValueOutOfRangeException("out of range", r_MaxAirPressure, 0);
+                throw new ValueOutOfRangeException("Maximum air pressure: " + this.r_MaxAirPressure, r_MaxAirPressure, 0);
             }
             else
             {
@@ -62,8 +62,9 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return string.Format(
-                "Manufacturer Name: {1}{0} Current Air Pressure {2}{0} maximum Air Pressure",
+                "Wheel Manufacturer Name: {1}{0}Current Air Pressure: {2}{0}Maximum Air Pressure:{3}{0}",
                 Environment.NewLine,
+                this.r_ManufacturerName,
                 this.m_CurrentAirPressure,
                 this.r_MaxAirPressure);
         }

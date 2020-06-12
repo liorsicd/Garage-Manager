@@ -42,5 +42,17 @@ namespace Ex03_ConsoleUI
                 Write(string.Format("{1}--{0}", i_StringArray[i], i));
             }
         }
+
+        public static void Wait()
+        {
+            System.Threading.Thread.Sleep(2000);
+        }
+
+        public static void PressToContinue()
+        {
+            Write("Press Any Key To Continue");
+            Console.ReadKey();
+        }
+
     }
 }

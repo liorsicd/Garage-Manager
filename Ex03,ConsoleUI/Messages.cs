@@ -8,7 +8,7 @@ namespace Ex03_ConsoleUI
 {
     public class Messages
     {
-        private static string[] m_MessagesAddVehicle = 
+        private static readonly string[] sr_MessagesAddVehicle = 
             { 
             "Please enter license number",
             "Please enter owner name",
@@ -22,7 +22,7 @@ namespace Ex03_ConsoleUI
             "Please enter engine volume",
             "Please enter license type",
             "Please enter cargo volume",
-            "Please enter yes if carrying dangerous materials, else no", 
+            "Please enter Y if carrying dangerous materials, else N", 
             "Please enter owner current amount of energy",
             "Please enter fuel type",
             "Please enter current air pressure",
@@ -31,11 +31,12 @@ namespace Ex03_ConsoleUI
             "Please change the status of a vehicle"
             };
 
-        private static string[] m_ErrorMessagesToUser =
+        private static readonly string[] sr_ErrorMessagesToUser =
             {
             "Invalid input, please try again",
             "Invalid String number, should contain only numbers",
             "Not valid name, please try again",
+            "this vehicle is already exist in the garage"
             // "Garage is empty, No vehicles to display",
             // "Invalid type of energy, please tey again",
             // "Invalid fuel type, please try again",
@@ -47,14 +48,15 @@ namespace Ex03_ConsoleUI
             };
 
 
-        private static string[] m_GeneralMessages =
+        private static readonly string[] sr_GeneralMessages =
             {
                 "Please enter status of vehicle to show",
-                "Welcome to Garage main menu\n Please Choose one of the options"
+                "Welcome to Garage main menu\n Please Choose one of the options",
+                "Operation Succeed"
                 
             };
 
-        private static string[] m_MenuMessages =
+        private static readonly string[] sr_MenuMessages =
             {
                 "Add Vehicle",
                 "Change Vehicle Status",
@@ -65,6 +67,7 @@ namespace Ex03_ConsoleUI
                 "Display License Numbers List",
                 "Quit"
             };
+
         public enum eAddVehicle
         {
             EnterLicenseNumber,
@@ -94,34 +97,36 @@ namespace Ex03_ConsoleUI
             InvalidInput = 0,
             InvalidStringNum = 1,
             InvalidName = 2,
+            VehicleExist
         }
 
 
         public enum eGeneralMessages
         {
             ChooseStatus,
-            StartMenu
+            StartMenu,
+            Success
         }
 
 
         public static string[] GetMenuMessages()
         {
-            return m_MenuMessages;
+            return sr_MenuMessages;
         }
 
         public static string GetErrorMessage(eErrorMessagesToUser i_Messages)
     {
-        return m_ErrorMessagesToUser[(int)i_Messages];
+        return sr_ErrorMessagesToUser[(int)i_Messages];
     }
 
         public static string GetMessageAddVehicle(eAddVehicle i_Messages)
         {
-            return m_MessagesAddVehicle[(int)i_Messages];
+            return sr_MessagesAddVehicle[(int)i_Messages];
         }
 
         public static string GetGeneralMessage(eGeneralMessages i_Messages)
         {
-            return m_GeneralMessages[(int)i_Messages];
+            return sr_GeneralMessages[(int)i_Messages];
         }
     }
 }

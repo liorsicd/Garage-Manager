@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
         public bool IsVehicleExist(string i_LicenseNumber)
         {
             return m_VehiclesInGarages.TryGetValue(i_LicenseNumber, out VehicleInGarage currentVehicleInGarage);
-            ;
+            
         }
 
         public void InsertVehicle(VehicleInGarage i_VehicleInGarage)
@@ -115,7 +115,7 @@ namespace Ex03.GarageLogic
             {
                 returnValue = true;
                 o_Details = string.Format(
-                    "License Number: {1}{0} Owner Name: {2}{0} Status: {3}{0}{4}",
+                    "License Number: {1}{0}Owner Name: {2}{0}Status: {3}{0}{4}",
                     Environment.NewLine,
                     currentVehicleInGarage.Vehicle.LicenseNumber,
                     currentVehicleInGarage.OwnerName,
