@@ -35,18 +35,36 @@ namespace Ex03_ConsoleUI
             {
             "Invalid input, please try again",
             "Invalid String number, should contain only numbers",
-            "Invalid Vehicle Type, please try again",
             "Not valid name, please try again",
-            "Garage is empty, No vehicles to display",
-            "Invalid type of energy, please tey again",
-            "Invalid fuel type, please try again",
-            "Invalid num of doors, please try again",
-            "Invalid color, please try again",
-            "Invalid license type, please try again",
-            "Not valid energy, please try again",
-            "Not valid status, please try again",
+            // "Garage is empty, No vehicles to display",
+            // "Invalid type of energy, please tey again",
+            // "Invalid fuel type, please try again",
+            // "Invalid num of doors, please try again",
+            // "Invalid color, please try again",
+            // "Invalid license type, please try again",
+            // "Not valid energy, please try again",
+            // "Not valid status, please try again",
             };
 
+
+        private static string[] m_GeneralMessages =
+            {
+                "Please enter status of vehicle to show",
+                "Welcome to Garage main menu\n Please Choose one of the options"
+                
+            };
+
+        private static string[] m_MenuMessages =
+            {
+                "Add Vehicle",
+                "Change Vehicle Status",
+                "Inflate Tires",
+                "Charge Electric Vehicle",
+                "Refuel Vehicle",
+                "Show Vehicle Details",
+                "Display License Numbers List",
+                "Quit"
+            };
         public enum eAddVehicle
         {
             EnterLicenseNumber,
@@ -75,15 +93,20 @@ namespace Ex03_ConsoleUI
         {
             InvalidInput = 0,
             InvalidStringNum = 1,
-            InvalidVehicleType = 2,
-            InvalidName = 3,
-            GarageIsEmpty = 4,
-            InvalidEnergy = 5,
-            InvalidFuelType = 6,
-            InvalidNumDoors = 7,
-            InvalidColor = 8,
-            InvalidLicenseType = 9,
-            InvalidStatus = 10
+            InvalidName = 2,
+        }
+
+
+        public enum eGeneralMessages
+        {
+            ChooseStatus,
+            StartMenu
+        }
+
+
+        public static string[] GetMenuMessages()
+        {
+            return m_MenuMessages;
         }
 
         public static string GetErrorMessage(eErrorMessagesToUser i_Messages)
@@ -94,6 +117,11 @@ namespace Ex03_ConsoleUI
         public static string GetMessageAddVehicle(eAddVehicle i_Messages)
         {
             return m_MessagesAddVehicle[(int)i_Messages];
+        }
+
+        public static string GetGeneralMessage(eGeneralMessages i_Messages)
+        {
+            return m_GeneralMessages[(int)i_Messages];
         }
     }
 }

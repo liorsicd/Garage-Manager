@@ -34,5 +34,13 @@ namespace Ex03_ConsoleUI
             Console.Clear();
         }
 
+
+        public static void WriteStringArray(string[] i_StringArray)
+        {
+            for(int i = -0; i < i_StringArray.Length; i++) 
+            {
+                Write(string.Format("{1}--{0}", i_StringArray[i], i));
+            }
+        }
     }
 }

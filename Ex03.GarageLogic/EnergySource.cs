@@ -81,7 +81,10 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ValueOutOfRangeException(this.m_MaxAmountOfEnergy, 0);
+                throw new ValueOutOfRangeException(
+                    "Max hours to fill is " + m_MaxAmountOfEnergy,
+                    this.m_MaxAmountOfEnergy,
+                    0);
             }
 
             return returnValue;

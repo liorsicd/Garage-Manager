@@ -139,7 +139,7 @@ namespace Ex03_ConsoleUI
         public void DisplayLicenseNumbersList()
         {
             object status;
-            Display.Write(Messages); //// choose status of vehicle
+            Display.Write(Messages.GetGeneralMessage(Messages.eGeneralMessages.ChooseStatus)); 
             do
             { 
                 Display.WriteEnum(typeof(VehicleInGarage.eStatus));
@@ -149,7 +149,6 @@ namespace Ex03_ConsoleUI
 
             Display.Write(this.m_Garage.GetListOfVehiclesInGarage((VehicleInGarage.eStatus)status).ToString());
         }
-
 
 
         public void InflateTires()
