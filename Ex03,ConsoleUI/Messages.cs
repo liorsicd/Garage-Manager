@@ -36,7 +36,8 @@ namespace Ex03_ConsoleUI
             "Invalid input, please try again",
             "Invalid String number, should contain only numbers",
             "Not valid name, please try again",
-            "this vehicle is already exist in the garage"
+            "this vehicle is already exist in the garage",
+            "this vehicle not exist in the garage"
             // "Garage is empty, No vehicles to display",
             // "Invalid type of energy, please tey again",
             // "Invalid fuel type, please try again",
@@ -97,7 +98,8 @@ namespace Ex03_ConsoleUI
             InvalidInput = 0,
             InvalidStringNum = 1,
             InvalidName = 2,
-            VehicleExist
+            VehicleExist,
+            VehicleNotExist
         }
 
 

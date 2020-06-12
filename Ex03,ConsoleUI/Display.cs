@@ -54,5 +54,12 @@ namespace Ex03_ConsoleUI
             Console.ReadKey();
         }
 
+        public static void WriteList(List<string> i_List)
+        {
+            foreach(string s in i_List)
+            {
+                Write(s);
+            }
+        }
     }
 }

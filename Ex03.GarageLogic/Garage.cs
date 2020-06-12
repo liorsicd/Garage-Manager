@@ -41,6 +41,7 @@ namespace Ex03.GarageLogic
             return list;
         }
 
+
         private bool getVehicleInGarage(string i_LicenseNumber, out VehicleInGarage i_CurrentVehicleInGarage)
         {
             return this.m_VehiclesInGarages.TryGetValue(i_LicenseNumber, out i_CurrentVehicleInGarage);

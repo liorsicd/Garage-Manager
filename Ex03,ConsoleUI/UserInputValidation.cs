@@ -25,6 +25,11 @@ namespace Ex03_ConsoleUI
             return choice;
         }
 
+        // private bool isMenuKey(string i_InputString)
+        // {
+        //     return i_InputString.Length == 1 && i_InputString[0] ==''
+        // }
+
         public bool IsValidOption(Type i_EnumType, out object o_Obj)
         {
             int choice = this.getChoiceFromUser();
@@ -39,20 +44,6 @@ namespace Ex03_ConsoleUI
             return returnValue;
         }
 
-        // public bool IsValidVehicleType(out Vehicle.eTypeOfVehicle o_VehicleType)
-        // {
-        //     int choice = this.getChoiceFromUser();
-        //     bool returnValue = true;
-        //     
-        //     if(!Enum.IsDefined(typeof(Vehicle.eTypeOfVehicle), choice))
-        //     {
-        //         Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidVehicleType));
-        //         returnValue = false;
-        //     }
-        //
-        //     o_VehicleType = (Vehicle.eTypeOfVehicle)choice;
-        //     return returnValue;
-        // }
 
         public bool IsValidName(out string o_Name)
         {
@@ -89,76 +80,6 @@ namespace Ex03_ConsoleUI
             return returnValue;
         }
 
-        // public bool IsValidEnergySource(out EnergySource.eEnergyTypes o_EnergySource)
-        // {
-        //     string energySource = Display.Read();
-        //     bool returnValue = energySource.Length > 0;
-        //
-        //     if (!Enum.TryParse(energySource, out o_EnergySource))
-        //     {
-        //         Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidEnergy));
-        //         returnValue = false;
-        //     }
-        //
-        //     return returnValue;
-        // }
-
-        // public bool IsValidCarColor(out Car.eCarColor o_CarColor)
-        // {
-        //     string color = Display.Read();
-        //     bool returnValue = color.Length > 0;
-        //     
-        //     if (!Enum.TryParse(color, out o_CarColor))
-        //     {
-        //         Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidColor));
-        //         returnValue = false;
-        //     }
-        //
-        //     return returnValue;
-        // }
-
-        // public bool IsValidNumOfDoors(out Car.eNumOfDoors o_CarDoors)
-        // {
-        //     string doors = Display.Read();
-        //     bool returnValue = doors.Length > 0;
-        //
-        //     if(!Enum.TryParse(doors, out o_CarDoors))
-        //     {
-        //         Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidNumDoors));
-        //         returnValue = false;
-        //     }
-        //
-        //     return returnValue;
-        // }
-
-        // public bool IsValidFuelType(out FuelEngine.eFuelType o_FuelType)
-        // {
-        //     string fuelType = Display.Read();
-        //     bool returnValue = fuelType.Length > 0;
-        //     
-        //     if (!Enum.TryParse(fuelType, out o_FuelType))
-        //     {
-        //         Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidFuelType));
-        //         returnValue = false;
-        //     }
-        //
-        //     return returnValue;
-        // }
-        //
-        // public bool IsValidLicenseType(out Motorcycle.eLicenseType o_LicenseType)
-        // {
-        //     string licenseType = Display.Read();
-        //     bool returnValue = licenseType.Length > 0;
-        //
-        //     if (!Enum.TryParse(licenseType, out o_LicenseType))
-        //     {
-        //         Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidLicenseType));
-        //         returnValue = false;
-        //     }
-        //
-        //     return returnValue;
-        //
-        // }
 
         public bool IsValidInteger(out int o_ValidInteger)
         {

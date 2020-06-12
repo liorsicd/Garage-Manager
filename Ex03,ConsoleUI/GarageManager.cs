@@ -31,8 +31,7 @@ namespace Ex03_ConsoleUI
             {
                 Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
             }
-            while(!this.r_UserInputValidation.IsValidStringNumber(out licenseNumber));
-
+            while(!this.r_UserInputValidation.IsValidStringNumber(out licenseNumber) );
             if(this.r_Garage.IsVehicleExist(licenseNumber))
             {
                 Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.VehicleExist));
@@ -50,19 +49,37 @@ namespace Ex03_ConsoleUI
             Display.Clear();
         }
 
+        private bool getLicenseNumber(out string o_LicenseNumber)
+        {
+            bool returnValue = false;
+            do
+            {
+                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
+            }
+            while(!this.r_UserInputValidation.IsValidStringNumber(out o_LicenseNumber));
+
+            if(!this.r_Garage.IsVehicleExist(o_LicenseNumber))
+            {
+                Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.VehicleNotExist));
+            }
+            else
+            {
+                returnValue = true;
+            }
+
+            return returnValue;
+        }
+
         public void ChargeElectricVehicle()
         {
             bool success = false;
             while(!success)
             {
-                string licenseNumber;
-                do
+                success = this.getLicenseNumber(out string licenseNumber);
+                if(!success)
                 {
-                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
+                    break;
                 }
-                while(this.r_UserInputValidation.IsValidStringNumber(out licenseNumber));
-
-
 
                 float minToCharge = 0;
                 do
@@ -74,10 +91,10 @@ namespace Ex03_ConsoleUI
                 if(!this.r_Garage.Recharge(licenseNumber, minToCharge))
                 {
                     Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
+                    success = false;
                 }
                 else
                 {
-                    success = true;
                     Display.Write(Messages.GetGeneralMessage(Messages.eGeneralMessages.Success));
                 }
             }
@@ -92,23 +109,22 @@ namespace Ex03_ConsoleUI
             while(!success)
             {
 
+                success = this.getLicenseNumber(out string licenseNumber);
+                if(!success)
+                {
+                    break;
+                }
+
                 object fuelType;
-                string licenseNumber = string.Empty;
-                float amount = 0;
                 do
                 {
-                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
+                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.FuelType));
+                    Display.WriteEnum(typeof(FuelEngine.eFuelType));
 
                 }
                 while(!this.r_UserInputValidation.IsValidOption(typeof(FuelEngine.eFuelType), out fuelType));
-
-                do
-                {
-                    Display.WriteEnum(typeof(FuelEngine.eFuelType));
-                }
-                while(this.r_UserInputValidation.IsValidStringNumber(out licenseNumber));
-
-
+                
+                float amount = 0;
                 do
                 {
                     Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.FuelToAdd));
@@ -118,10 +134,10 @@ namespace Ex03_ConsoleUI
                 if(!this.r_Garage.AddFuel(licenseNumber, amount, (FuelEngine.eFuelType)fuelType))
                 {
                     Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
+                    success = false;
                 }
                 else
                 {
-                    success = true;
                     Display.Write(Messages.GetGeneralMessage(Messages.eGeneralMessages.Success));
                 }
             }
@@ -135,16 +151,13 @@ namespace Ex03_ConsoleUI
             bool success = false;
             while(!success)
             {
-                object status;
-                string licenseNumber;
-
-                do
+                success = this.getLicenseNumber(out string licenseNumber);
+                if(!success)
                 {
-                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
-
+                    break;
                 }
-                while(!this.r_UserInputValidation.IsValidStringNumber(out licenseNumber));
 
+                object status;
                 do
                 {
                     Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.ChangeStatus));
@@ -155,11 +168,9 @@ namespace Ex03_ConsoleUI
                 if(!this.r_Garage.ChangeVehicleStatus(licenseNumber, (VehicleInGarage.eStatus)status))
                 {
                     Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
+                    success = false;
                 }
-                else
-                {
-                    success = true;
-                }
+
             }
             Display.Write(Messages.GetGeneralMessage(Messages.eGeneralMessages.Success));
             Display.PressToContinue();
@@ -177,7 +188,7 @@ namespace Ex03_ConsoleUI
             }
             while(!this.r_UserInputValidation.IsValidOption(typeof(VehicleInGarage.eStatus), out status));
 
-            Display.Write(this.r_Garage.GetListOfVehiclesInGarage((VehicleInGarage.eStatus)status).ToString());
+            Display.WriteList(this.r_Garage.GetListOfVehiclesInGarage((VehicleInGarage.eStatus)status));
             Display.PressToContinue();
             Display.Clear();
 
@@ -189,20 +200,20 @@ namespace Ex03_ConsoleUI
             bool success = false;
             while(!success)
             {
-                string licenseNumber;
-                do
+                success = this.getLicenseNumber(out string licenseNumber);
+                if(!success)
                 {
-                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
+                    break;
                 }
-                while(!this.r_UserInputValidation.IsValidStringNumber(out licenseNumber));
 
                 if(!this.r_Garage.AddAir(licenseNumber))
                 {
                     Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
+                    success = false;
                 }
                 else
                 {
-                    success = true;
+                    
                     Display.Write(Messages.GetGeneralMessage(Messages.eGeneralMessages.Success));
                 }
             }
@@ -217,20 +228,16 @@ namespace Ex03_ConsoleUI
             string details = null;
             while(!success)
             {
-                string licenseNumber;
-                do
+                success = this.getLicenseNumber(out string licenseNumber);
+                if(!success)
                 {
-                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber));
+                    break;
                 }
-                while(!this.r_UserInputValidation.IsValidStringNumber(out licenseNumber));
 
                 if(!this.r_Garage.ShowVehicleDetails(licenseNumber, out details))
                 {
                     Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
-                }
-                else
-                {
-                    success = true;
+                    success = false;
                 }
             }
             Display.Write(details);

@@ -51,7 +51,7 @@ namespace Ex03_ConsoleUI
             string ownerName;
             do
             {
-                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.OwnerName)); 
+                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.OwnerName));
             }
             while(!this.m_Validation.IsValidName(out ownerName));
 
