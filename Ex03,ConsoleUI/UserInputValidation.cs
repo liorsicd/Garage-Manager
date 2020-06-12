@@ -98,7 +98,7 @@ namespace Ex03_ConsoleUI
 
             if (!Enum.TryParse(status, out o_Status))
             {
-                Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.));
+                Display.Write(i_Msg: Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidStatus));
                 returnValue = false;
             }
 
