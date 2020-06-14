@@ -130,10 +130,11 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return String.Format(
-                "Model Name: {1}{0}{2}{3}",
+                "Model Name: {1}{0} Wheel's Details:{2}{0} Remaining Energy Percentage:{3}{0} Energy Source:{4}{0}",
                 Environment.NewLine,
                 this.m_Model,
                 this.m_Wheels[0],
+                this.m_RemainingEnergyPercentage,
                 this.m_EnergySource);
         }
     }

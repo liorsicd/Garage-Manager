@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Car.cs" />
     <Compile Include="ValueOutOfRangeException.cs" />
+    <Compile Include="VehicleAdder.cs" />
     <Compile Include="VehicleInGarage.cs" />
     <Compile Include="ElectricEngine.cs" />
     <Compile Include="EnergySource.cs" />
