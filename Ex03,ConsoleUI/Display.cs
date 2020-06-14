@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03_ConsoleUI
 {
-    using Ex03.GarageLogic;
-
     public class Display
     {
         public static void Write(string i_Msg)
@@ -33,7 +28,6 @@ namespace Ex03_ConsoleUI
         {
             Console.Clear();
         }
-
 
         public static void WriteStringArray(string[] i_StringArray)
         {

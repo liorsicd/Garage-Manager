@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -18,7 +15,6 @@ namespace Ex03.GarageLogic
         public bool IsVehicleExist(string i_LicenseNumber)
         {
             return this.r_VehiclesInGarages.TryGetValue(i_LicenseNumber, out VehicleInGarage currentVehicleInGarage);
-            
         }
 
         public void InsertVehicle(VehicleInGarage i_VehicleInGarage)
@@ -29,7 +25,6 @@ namespace Ex03.GarageLogic
 
         public List<string> GetListOfVehiclesInGarage(VehicleInGarage.eStatus i_Status)
         {
-
             List<string> list = new List<string>();
             foreach(KeyValuePair<string, VehicleInGarage> v in this.r_VehiclesInGarages)
             {
@@ -41,7 +36,6 @@ namespace Ex03.GarageLogic
 
             return list;
         }
-
 
         private bool getVehicleInGarage(string i_LicenseNumber, out VehicleInGarage i_CurrentVehicleInGarage)
         {
@@ -80,7 +74,7 @@ namespace Ex03.GarageLogic
                     throw new ArgumentException("wrong operation for this energy source");
                 }
 
-                if(!((FuelEngine)currentVehicleInGarage.Vehicle.EnergySource).checkFuelType(i_Type))
+                if(!((FuelEngine)currentVehicleInGarage.Vehicle.EnergySource).CheckFuelType(i_Type))
                 {
                     throw new ArgumentException("not correct fuel type");
                 }
@@ -89,12 +83,10 @@ namespace Ex03.GarageLogic
             }
 
             currentVehicleInGarage.Vehicle.UpdateRemainingEnergy();
-
         }
 
         public void Recharge(string i_LicenseNumber, float i_MinutesToAdd)
         {
-            
             if(getVehicleInGarage(i_LicenseNumber, out VehicleInGarage currentVehicleInGarage))
             {
                 if(currentVehicleInGarage.Vehicle.EnergySource.EnergyType != EnergySource.eEnergyTypes.Electric)
@@ -106,7 +98,6 @@ namespace Ex03.GarageLogic
             }
 
             currentVehicleInGarage.Vehicle.UpdateRemainingEnergy();
-
         }
 
         public bool ShowVehicleDetails(string i_LicenseNumber, out string o_Details)
@@ -127,10 +118,6 @@ namespace Ex03.GarageLogic
 
             return returnValue;
         }
-
-
     }
-
-
 }
 

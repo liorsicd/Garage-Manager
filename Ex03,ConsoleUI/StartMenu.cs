@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03_ConsoleUI
 {
     public class StartMenu
     {
-        private GarageManager m_GarageManager;
-        private UserInputValidation m_UserInputValidation;
+        private readonly GarageManager r_GarageManager;
+        private readonly UserInputValidation r_UserInputValidation;
 
         public StartMenu(GarageManager i_GarageManager)
         {
-            this.m_GarageManager = i_GarageManager;
-            this.m_UserInputValidation = new UserInputValidation();
+            this.r_GarageManager = i_GarageManager;
+            this.r_UserInputValidation = new UserInputValidation();
         }
 
         public enum eMenu
@@ -29,7 +25,6 @@ namespace Ex03_ConsoleUI
             Quit
         }
 
-
         public void Show()
         {
             object choice;
@@ -38,40 +33,35 @@ namespace Ex03_ConsoleUI
                 Display.Write(Messages.GetGeneralMessage(Messages.eGeneralMessages.StartMenu));
                 Display.WriteStringArray(Messages.GetMenuMessages());
             }
-            while(!this.m_UserInputValidation.IsValidOption(typeof(eMenu), out choice));
+            while(!this.r_UserInputValidation.IsValidOption(typeof(eMenu), out choice));
             Display.Clear();
             switch((eMenu)choice)
             {
                 case eMenu.AddVehicle:
-                    this.m_GarageManager.AddVehicle();
+                    this.r_GarageManager.AddVehicle();
                     break;
                 case eMenu.ChangeStatus:
-                    this.m_GarageManager.ChangeStatus();
+                    this.r_GarageManager.ChangeStatus();
                     break;
                 case eMenu.InflateTires:
-                    this.m_GarageManager.InflateTires();
+                    this.r_GarageManager.InflateTires();
                     break;
                 case eMenu.ChargeElectricVehicle:
-                    this.m_GarageManager.ChargeElectricVehicle();
+                    this.r_GarageManager.ChargeElectricVehicle();
                     break;
                 case eMenu.RefuelVehicle:
-                    this.m_GarageManager.RefuelVehicle();
+                    this.r_GarageManager.RefuelVehicle();
                     break;
                 case eMenu.PrintVehicleDetails:
-                    this.m_GarageManager.PrintVehicleDetails();
+                    this.r_GarageManager.PrintVehicleDetails();
                     break;
                 case eMenu.DisplayLicenseNumbersList:
-                    this.m_GarageManager.DisplayLicenseNumbersList();
+                    this.r_GarageManager.DisplayLicenseNumbersList();
                     break;
                 case eMenu.Quit:
                     Environment.Exit(0);
                     break;
-
             }
         }
-
-
     }
-
-
 }

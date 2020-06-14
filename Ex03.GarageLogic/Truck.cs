@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -12,19 +8,19 @@ namespace Ex03.GarageLogic
         private const int k_MaximumWheelPressure = 28;
         private const float k_MaxFuelAmount = 120;
         private const float k_MaxElectricAmount = -1;
-        private bool b_IsDangerous;
+        private bool m_IsDangerous;
         private float m_CargoVolume;
 
         public Truck(Vehicle.eTypeOfVehicle i_Type)
             : base(i_Type)
         {
-            base.k_NumOfWheels = k_NumOfWheels;
-            base.k_MaximumWheelPressure = k_MaximumWheelPressure;
+            this.m_NumOfWheels = k_NumOfWheels;
+            this.m_MaximumWheelPressure = k_MaximumWheelPressure;
         }
 
-        public void SetIsdangerous(bool i_IsDangerous)
+        public void SetIsDangerous(bool i_IsDangerous)
         {
-            b_IsDangerous = i_IsDangerous;
+            m_IsDangerous = i_IsDangerous;
         }
 
         public void SetCargoVolume(float i_CargoVolume)
@@ -44,11 +40,11 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return String.Format(
+            return string.Format(
                 "{3}Cargo Volume {1}{0}the truck is: {2}Carrying dangerous materials{0}",
                 Environment.NewLine,
                 this.m_CargoVolume,
-                !this.b_IsDangerous ? "not" : String.Empty,
+                !this.m_IsDangerous ? "not" : string.Empty,
                 base.ToString());
         }
     }

@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex03_ConsoleUI
+﻿namespace Ex03_ConsoleUI
 {
-    using Ex03.GarageLogic;
-
     public class Messages
     {
         private static readonly string[] sr_MessagesAddVehicle = 
@@ -43,13 +35,11 @@ namespace Ex03_ConsoleUI
             "No vehicles in this status"
             };
 
-
         private static readonly string[] sr_GeneralMessages =
             {
                 "Please enter status of vehicle to show",
                 "Welcome to Garage main menu\n Please Choose one of the options",
                 "Operation Succeed"
-                
             };
 
         private static readonly string[] sr_MenuMessages =
@@ -87,7 +77,6 @@ namespace Ex03_ConsoleUI
             ChangeStatus
         }
 
-
         public enum eErrorMessagesToUser
         {
             InvalidInput,
@@ -98,7 +87,6 @@ namespace Ex03_ConsoleUI
             VehicleStatus
         }
 
-
         public enum eGeneralMessages
         {
             ChooseStatus,
@@ -106,16 +94,15 @@ namespace Ex03_ConsoleUI
             Success
         }
 
-
         public static string[] GetMenuMessages()
         {
             return sr_MenuMessages;
         }
 
         public static string GetErrorMessage(eErrorMessagesToUser i_Messages)
-    {
+        {
         return sr_ErrorMessagesToUser[(int)i_Messages];
-    }
+        }
 
         public static string GetMessageAddVehicle(eAddVehicle i_Messages)
         {

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03_ConsoleUI
 {
@@ -11,8 +8,6 @@ namespace Ex03_ConsoleUI
     public class GarageManager
     {
         private readonly Garage r_Garage;
-
-
         private readonly UserInputValidation r_UserInputValidation;
 
         public GarageManager()
@@ -105,7 +100,6 @@ namespace Ex03_ConsoleUI
                     {
                         Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.FuelType));
                         Display.WriteEnum(typeof(FuelEngine.eFuelType));
-
                     }
                     while(!this.r_UserInputValidation.IsValidOption(typeof(FuelEngine.eFuelType), out fuelType));
 
@@ -160,7 +154,6 @@ namespace Ex03_ConsoleUI
             do
             { 
                 Display.WriteEnum(typeof(VehicleInGarage.eStatus));
-
             }
             while(!this.r_UserInputValidation.IsValidOption(typeof(VehicleInGarage.eStatus), out status));
 
@@ -178,10 +171,8 @@ namespace Ex03_ConsoleUI
             Display.Clear();
         }
 
-
         public void InflateTires()
         {
-            
             if(this.getLicenseNumber(out string licenseNumber))
             {
                 try
@@ -199,26 +190,16 @@ namespace Ex03_ConsoleUI
             Display.Clear();
         }
 
-
         public void PrintVehicleDetails()
         {
-            bool success = false;
-            string details = null;
-            while(!success)
+            if(this.getLicenseNumber(out string licenseNumber))
             {
-                success = this.getLicenseNumber(out string licenseNumber);
-                if(!success)
-                {
-                    break;
-                }
-
-                if(!this.r_Garage.ShowVehicleDetails(licenseNumber, out details))
-                {
-                    Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
-                    success = false;
-                }
+                Display.Write(
+                    !this.r_Garage.ShowVehicleDetails(licenseNumber, out string details)
+                        ? Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput)
+                        : details);
             }
-            Display.Write(details);
+            
             Display.PressToContinue();
             Display.Clear();
         }

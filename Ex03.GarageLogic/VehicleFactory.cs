@@ -1,23 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
     using System.Reflection;
-    using System.Runtime.CompilerServices;
 
     public class VehicleFactory
     {
         private Vehicle m_Vehicle;
-
         private VehicleInGarage m_VehicleInGarage;
-
         private List<MethodInfo> m_VehicleSetters;
         private List<MethodInfo> m_EnergySourceSetters;
-
 
         public void CreateVehicle(Vehicle.eTypeOfVehicle i_VehicleType)
         {
@@ -58,7 +51,6 @@ namespace Ex03.GarageLogic
                         throw new ArgumentException("not a valid energy source type");
                 }
             
-
             this.m_Vehicle.EnergySource.InitMaxAmountOfEnergy(this.m_Vehicle);
             this.m_EnergySourceSetters = this.getSetters(this.m_Vehicle.EnergySource);
         }
@@ -94,7 +86,6 @@ namespace Ex03.GarageLogic
             return this.m_EnergySourceSetters;
         }
 
-
         public void RunSetter(MethodInfo i_Setter, object[] i_Params, Type i_Type)
         {
             if(i_Type == typeof(Vehicle))
@@ -121,7 +112,5 @@ namespace Ex03.GarageLogic
         {
             return this.m_Vehicle;
         }
-
-
     }
 }

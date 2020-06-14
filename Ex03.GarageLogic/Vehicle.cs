@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -10,28 +7,24 @@ namespace Ex03.GarageLogic
     {
         public enum eTypeOfVehicle
         {
-            Car = 0,
-
-            Motorcycle = 1,
-
-            Truck = 2,
+            Car,
+            Motorcycle,
+            Truck
         }
 
-        protected int k_NumOfWheels;
-        protected int k_MaximumWheelPressure;
+        private readonly eTypeOfVehicle r_Type;
+        protected int m_NumOfWheels;
+        protected int m_MaximumWheelPressure;
         private string m_Model;
-        
         private string m_LicenseNumber;
         private EnergySource m_EnergySource;
         private float m_RemainingEnergyPercentage;
         private List<Wheel> m_Wheels;
-        private readonly eTypeOfVehicle r_Type;
 
         protected Vehicle(eTypeOfVehicle i_Type)
         {
             this.r_Type = i_Type;
         }
-
 
         public void SetVehicleModel(string i_Model)
         {
@@ -40,13 +33,12 @@ namespace Ex03.GarageLogic
 
         public void SetWheels(string i_ManufacturerName, float i_CurrentAirPressure)
         {
-            this.m_Wheels = new List<Wheel>(k_NumOfWheels);
-            for(int i = 0; i < k_NumOfWheels; i++)
+            this.m_Wheels = new List<Wheel>(this.m_NumOfWheels);
+            for(int i = 0; i < this.m_NumOfWheels; i++)
             {
-                this.m_Wheels.Add(new Wheel(k_MaximumWheelPressure, i_ManufacturerName, i_CurrentAirPressure));
+                this.m_Wheels.Add(new Wheel(this.m_MaximumWheelPressure, i_ManufacturerName, i_CurrentAirPressure));
             }
         }
-
 
         public void UpdateRemainingEnergy()
         {
@@ -59,10 +51,6 @@ namespace Ex03.GarageLogic
             get
             {
                 return this.m_Model;
-            }
-            set
-            {
-                this.m_Model = value;
             }
         }
 
@@ -102,6 +90,7 @@ namespace Ex03.GarageLogic
                 m_Wheels = value;
             }
         }
+
         public EnergySource EnergySource
         {
             set
@@ -129,7 +118,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return String.Format(
+            return string.Format(
                 "Type: {5}{0}Model Name: {1}{0}{2}{0}Remaining Energy Percentage: {3}%{0}{4}",
                 Environment.NewLine,
                 this.m_Model,

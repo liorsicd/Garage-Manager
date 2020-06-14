@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03_ConsoleUI
 {
-    using System.Runtime.InteropServices.WindowsRuntime;
-
-    using Ex03.GarageLogic;
-
     public class UserInputValidation
     {
         private int getChoiceFromUser()
@@ -25,7 +17,6 @@ namespace Ex03_ConsoleUI
             return choice;
         }
 
-
         public bool IsValidOption(Type i_EnumType, out object o_Obj)
         {
             int choice = this.getChoiceFromUser();
@@ -39,7 +30,6 @@ namespace Ex03_ConsoleUI
             o_Obj = choice;
             return returnValue;
         }
-
 
         public bool IsValidName(out string o_Name)
         {
@@ -76,7 +66,6 @@ namespace Ex03_ConsoleUI
             return returnValue;
         }
 
-
         public bool IsValidInteger(out int o_ValidInteger)
         {
             string userInput = Display.Read();
@@ -89,8 +78,6 @@ namespace Ex03_ConsoleUI
 
             return returnValue;
         }
-
-
 
         public bool IsValidFloat(out float o_ValidFloat)
         {

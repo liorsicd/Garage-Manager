@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 namespace Ex03.GarageLogic
 {
     public class FuelEngine : EnergySource
@@ -11,13 +8,10 @@ namespace Ex03.GarageLogic
 
         public enum eFuelType
         {
-            Soler = 1,
-
-            Octan95 = 2,
-
-            Octan96 = 3,
-
-            Octan98 = 4
+            Soler,
+            Octan95,
+            Octan96,
+            Octan98
         }
 
         public FuelEngine(EnergySource.eEnergyTypes i_EnergyType)
@@ -30,7 +24,7 @@ namespace Ex03.GarageLogic
             this.m_FuelType = i_FuelType;
         }
 
-        public bool checkFuelType(eFuelType i_FuelType)
+        public bool CheckFuelType(eFuelType i_FuelType)
         {
             return this.m_FuelType == i_FuelType;
         }

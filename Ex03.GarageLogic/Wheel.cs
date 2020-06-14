@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
     public class Wheel
     {
         private readonly float r_MaxAirPressure;
-        private string r_ManufacturerName;
+        private readonly string r_ManufacturerName;
         private float m_CurrentAirPressure;
         
         public Wheel(float i_MaxAirPressure, string i_ManufacturerName, float i_CurrentAirPressure)
@@ -26,6 +22,7 @@ namespace Ex03.GarageLogic
                 return r_ManufacturerName;
             }
         }
+
         public float MaxAirPressure
         {
             get

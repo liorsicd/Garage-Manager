@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -18,7 +14,7 @@ namespace Ex03.GarageLogic
             Electric
         }
 
-        public EnergySource(eEnergyTypes i_EnergyType)
+        protected EnergySource(eEnergyTypes i_EnergyType)
         {
             this.m_EnergyType = i_EnergyType;
         }
@@ -81,7 +77,6 @@ namespace Ex03.GarageLogic
             }
 
             m_CurrentAmountOfEnergy += i_AmountOfEnergy;
-            
         }
 
         public override string ToString()
