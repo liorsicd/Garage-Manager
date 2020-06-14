@@ -24,9 +24,9 @@ namespace Ex03.GarageLogic
         public VehicleInGarage(string i_OwnerName, string i_PhoneNumber,  Vehicle i_Vehicle)
         {
             this.r_OwnerName = i_OwnerName;
-            this.r_PhoneNumber = PhoneNumber;
+            this.r_PhoneNumber = i_PhoneNumber;
             this.m_Vehicle = i_Vehicle;
-            this.m_status = 0;
+            this.m_status = eStatus.OutOfGarage;
         }
 
 

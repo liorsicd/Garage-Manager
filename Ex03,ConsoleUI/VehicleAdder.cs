@@ -25,34 +25,43 @@ namespace Ex03_ConsoleUI
             this.m_IsReady = false;
         }
 
-        public void Start()
+        public void Start(string i_LicenseNumber)
         {
             setVehicleParams();
             setEnergySourceParams();
+            SetVehicleLicenseNumber(i_LicenseNumber);
             setVehicleInGarageParams();
+            
             m_IsReady = true;
         }
-        
+
         public VehicleInGarage GetNewVehicle()
         {
             return this.m_IsReady ? this.m_Factory.GetVehicleInGarage() : null;
         }
 
+        public void SetVehicleLicenseNumber(string i_LicenseNumber)
+        {
+            this.m_Factory.SetLicenseNumber(i_LicenseNumber);
+        }
+
         private void setVehicleInGarageParams()
         {
+            Display.Clear();
             string ownerName;
             do
             {
-                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.OwnerName)); 
+                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.OwnerName));
             }
             while(!this.m_Validation.IsValidName(out ownerName));
 
             string phoneNumber;
+            Display.Clear();
             do
             {
                 Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.PhoneNumber)); 
             }
-            while(!this.m_Validation.IsValidName(out phoneNumber));
+            while(!this.m_Validation.IsValidStringNumber(out phoneNumber));
 
 
 
@@ -61,21 +70,23 @@ namespace Ex03_ConsoleUI
 
         private void setVehicleParams()
         {
-            Vehicle.eTypeOfVehicle vehicleType;
+            Display.Clear();
+            object vehicleType;
             do
             {
                 Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.VehicleType)); 
                 Display.WriteEnum(typeof(Vehicle.eTypeOfVehicle));
             }
-            while(!this.m_Validation.IsValidVehicleType(out vehicleType));
+            while(!this.m_Validation.IsValidOption(typeof(Vehicle.eTypeOfVehicle), out vehicleType));
 
             try
             {
-                this.m_Factory.CreateVehicle(vehicleType);
+                this.m_Factory.CreateVehicle((Vehicle.eTypeOfVehicle) vehicleType);
             }
             catch(ArgumentException e)
             {
                 Display.Write(e.Message);
+                Display.Wait();
                 this.setVehicleParams();
             }
             
@@ -86,25 +97,28 @@ namespace Ex03_ConsoleUI
 
         private void setEnergySourceParams()
         {
-            EnergySource.eEnergyTypes energyType;
+            Display.Clear();
+            object energyType;
             do
             {
                 Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnergySource)); 
                 Display.WriteEnum(typeof(EnergySource.eEnergyTypes));
             }
-            while(!this.m_Validation.IsValidEnergySource(out energyType));
+            while(!this.m_Validation.IsValidOption(typeof(EnergySource.eEnergyTypes), out energyType));
 
             try
             {
-                this.m_Factory.SetEnergySource(energyType);
+                this.m_Factory.SetEnergySource((EnergySource.eEnergyTypes)energyType);
             }
             catch(ArgumentException e)
             {
                 Display.Write(e.Message);
+                Display.Wait();
                 this.setEnergySourceParams();
             }
             
             runtObjectsSetters(this.m_Factory.GetEnergySourceSetters(), typeof(EnergySource));
+            this.m_Factory.GetVehicle().UpdateRemainingEnergy();
         }
 
 
@@ -113,25 +127,38 @@ namespace Ex03_ConsoleUI
             foreach(MethodInfo s in i_Setters)
             {
                 ParameterInfo[] paramArr = s.GetParameters();
-                for(int i = 0; i < paramArr.Length; i++)
-                {
-                    paramArr[i] = this.getParameterFromUser(paramArr[i]);
-                }
+                object[] returnParams = new object[paramArr.Length];
+                GetParameters:
+                    for(int i = 0; i < paramArr.Length; i++)
+                    {
+                        Display.Clear();
+                        returnParams[i] = this.getParameterFromUser(paramArr[i]);
+                    }
 
-                this.m_Factory.RunSetter(s, paramArr, i_Type);
+                    try
+                    {
+                        this.m_Factory.RunSetter(s, returnParams, i_Type);
+                    }
+                    catch(Exception e)
+                    {
+                        Display.Write(e.InnerException.Message);
+                        Display.Wait();
+                        goto GetParameters;
+                    }
             }
         }
 
-        private ParameterInfo getParameterFromUser(ParameterInfo i_Parameter)
+        private object getParameterFromUser(ParameterInfo i_Parameter)
         {
             object returnValue;
+            
             switch(i_Parameter.Name)
             {
                 case "i_LicenseNumber":
                     string licenseNumber;
                     do
                     {
-                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber)); //get LicenseNumber
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnterLicenseNumber)); 
                     }
                     while(!this.m_Validation.IsValidStringNumber(out licenseNumber));
                     returnValue = licenseNumber;
@@ -141,7 +168,7 @@ namespace Ex03_ConsoleUI
                     string model;
                     do
                     {
-                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.VehicleModel)); //get model
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.VehicleModel)); 
                     }
                     while(!this.m_Validation.IsValidName(out model));
 
@@ -152,7 +179,7 @@ namespace Ex03_ConsoleUI
                     string manufacturerName;
                     do
                     {
-                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.WheelManufacturerName)); //ManufacturerName
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.WheelManufacturerName)); 
                     }
                     while(!this.m_Validation.IsValidName(out manufacturerName));
 
@@ -160,24 +187,24 @@ namespace Ex03_ConsoleUI
                     break;
 
                 case "i_CarColor":
-                    Car.eCarColor color;
+                    object color;
                     do
                     {
                         Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.CarColor)); 
                         Display.WriteEnum(typeof(Car.eCarColor));
                     }
-                    while(!this.m_Validation.IsValidCarColor(out color));
-                    returnValue = color;
+                    while(!this.m_Validation.IsValidOption(typeof(Car.eCarColor), out color));
+                    returnValue = (Car.eCarColor) color;
                     break;
                 case "i_NumOfDoors":
-                    Car.eNumOfDoors numOfDoors;
+                    object numOfDoors;
                     do
                     {
                         Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.NumOfDoors)); 
                         Display.WriteEnum(typeof(Car.eNumOfDoors));
                     }
-                    while(!this.m_Validation.IsValidNumOfDoors(out numOfDoors));
-                    returnValue = numOfDoors;
+                    while(!this.m_Validation.IsValidOption(typeof(Car.eNumOfDoors), out numOfDoors));
+                    returnValue = (Car.eNumOfDoors)numOfDoors;
                     break;
 
                 case "i_EngineVolume":
@@ -191,22 +218,22 @@ namespace Ex03_ConsoleUI
                     break;
 
                 case "i_LicenseType":
-                    Motorcycle.eLicenseType licenseType;
+                    object licenseType;
                     do
                     {
                         Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.LicenseType)); 
                         Display.WriteEnum(typeof(Motorcycle.eLicenseType));
                     }
-                    while(!this.m_Validation.IsValidLicenseType(out licenseType));
+                    while(!this.m_Validation.IsValidOption(typeof(Motorcycle.eLicenseType), out licenseType));
 
-                    returnValue = licenseType;
+                    returnValue = (Motorcycle.eLicenseType)licenseType;
                     break;
 
                 case "i_CargoVolume":
                     float cargoVol;
                     do
                     {
-                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.CargoVolume)); //get cargo volume
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.CargoVolume));
                     }
                     while(!this.m_Validation.IsValidFloat(out cargoVol));
 
@@ -217,7 +244,7 @@ namespace Ex03_ConsoleUI
                     bool isDan;
                     do
                     {
-                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.IsDangerous)); //get is dangerous
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.IsDangerous)); 
                     }
                     while(!this.m_Validation.IsValidBoolAnswer(out isDan));
 
@@ -228,7 +255,7 @@ namespace Ex03_ConsoleUI
                     float currentAmount;
                         do
                         {
-                            Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.CurrentEnergyAmount)); //get current amount
+                            Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.CurrentEnergyAmount)); 
                         }
                         while(!this.m_Validation.IsValidFloat(out currentAmount));
 
@@ -236,15 +263,15 @@ namespace Ex03_ConsoleUI
                         break;
 
                 case "i_FuelType":
-                    FuelEngine.eFuelType fuelType;
+                    object fuelType;
                     do
                     {
                         Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.FuelType)); 
                         Display.WriteEnum(typeof(FuelEngine.eFuelType));
                     }
-                    while(!this.m_Validation.IsValidFuelType(out fuelType));
+                    while(!this.m_Validation.IsValidOption(typeof(FuelEngine.eFuelType), out fuelType));
 
-                    returnValue = fuelType;
+                    returnValue = (FuelEngine.eFuelType)fuelType;
                     break;
 
                 case "i_CurrentAirPressure":
@@ -261,8 +288,8 @@ namespace Ex03_ConsoleUI
                     returnValue = null;
                     break;
             }
-            
-            return returnValue as ParameterInfo;
+
+            return returnValue;
         }
     }
 

@@ -18,6 +18,8 @@ namespace Ex03.GarageLogic
         public Truck(Vehicle.eTypeOfVehicle i_Type)
             : base(i_Type)
         {
+            base.k_NumOfWheels = k_NumOfWheels;
+            base.k_MaximumWheelPressure = k_MaximumWheelPressure;
         }
 
         public void SetIsdangerous(bool i_IsDangerous)
@@ -43,7 +45,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return String.Format(
-                "{3} Cargo Volume {1}{0}, the truck is: {2} carrying dangerous materials{0}",
+                "{3}Cargo Volume {1}{0}the truck is: {2}Carrying dangerous materials{0}",
                 Environment.NewLine,
                 this.m_CargoVolume,
                 !this.b_IsDangerous ? "not" : String.Empty,

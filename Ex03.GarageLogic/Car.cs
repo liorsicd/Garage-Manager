@@ -21,6 +21,8 @@ namespace Ex03.GarageLogic
         public Car(Vehicle.eTypeOfVehicle i_Type)
             : base(i_Type)
         {
+            base.k_NumOfWheels = k_NumOfWheels;
+            base.k_MaximumWheelPressure = k_MaximumWheelPressure;
         }
 
         public void SetNumOfDoors(eNumOfDoors i_NumOfDoors)
@@ -35,10 +37,10 @@ namespace Ex03.GarageLogic
 
         public enum eCarColor
         {
-            Red,
-            Black,
-            White,
-            Silver
+            Red = 0,
+            Black = 1,
+            White = 2,
+            Silver = 3
         }
 
         public override float GetMaxFuelAmount()
@@ -62,7 +64,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return String.Format(
-                "{3} Car Color: {1}{0}, Number Of Doors: {2}{0}",
+                "{3}Car Color: {1}{0}Number Of Doors: {2}{0}",
                 Environment.NewLine,
                 this.m_CarColor,
                 this.m_NumOfDoors,

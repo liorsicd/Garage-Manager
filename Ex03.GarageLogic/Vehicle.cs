@@ -10,11 +10,11 @@ namespace Ex03.GarageLogic
     {
         public enum eTypeOfVehicle
         {
-            Car,
+            Car = 0,
 
-            Motorcycle,
+            Motorcycle = 1,
 
-            Truck,
+            Truck = 2,
         }
 
         protected int k_NumOfWheels;
@@ -32,18 +32,18 @@ namespace Ex03.GarageLogic
             this.r_Type = i_Type;
         }
 
-        public void SetVehicleParams(string i_LicenseNumber, string i_Model)
+
+        public void SetVehicleModel(string i_Model)
         {
-            this.m_LicenseNumber = i_LicenseNumber;
             this.m_Model = i_Model;
         }
 
         public void SetWheels(string i_ManufacturerName, float i_CurrentAirPressure)
         {
-            Wheels = new List<Wheel>(k_NumOfWheels);
+            this.m_Wheels = new List<Wheel>(k_NumOfWheels);
             for(int i = 0; i < k_NumOfWheels; i++)
             {
-                Wheels[i] = new Wheel(k_MaximumWheelPressure, i_ManufacturerName, i_CurrentAirPressure);
+                this.m_Wheels.Add(new Wheel(k_MaximumWheelPressure, i_ManufacturerName, i_CurrentAirPressure));
             }
         }
 
@@ -70,7 +70,7 @@ namespace Ex03.GarageLogic
         {
             set
             {
-                this.m_Model = value;
+                this.m_LicenseNumber = value;
             }
             get
             {
@@ -130,11 +130,11 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return String.Format(
-                "License Number: {1}{0} Model Name: {2}{0}{3}",
+                "Model Name: {1}{0}{2}{3}",
                 Environment.NewLine,
-                this.m_LicenseNumber,
                 this.m_Model,
-                this.m_Wheels[0]);
+                this.m_Wheels[0],
+                this.m_EnergySource);
         }
     }
 }

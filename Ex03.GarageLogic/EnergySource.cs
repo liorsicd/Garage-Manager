@@ -81,7 +81,10 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ValueOutOfRangeException(this.m_MaxAmountOfEnergy, 0);
+                throw new ValueOutOfRangeException(
+                    "Max hours to fill is " + m_MaxAmountOfEnergy,
+                    this.m_MaxAmountOfEnergy,
+                    0);
             }
 
             return returnValue;
@@ -90,7 +93,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return string.Format(
-                "Engine type: {1}{0} current amount of energy {2}{0}, maximum amount of energy {3}{0}",
+                "Engine type: {1}{0}Current amount of energy {2}{0}Maximum amount of energy {3}{0}",
                 Environment.NewLine,
                 this.m_EnergyType,
                 this.m_CurrentAmountOfEnergy,

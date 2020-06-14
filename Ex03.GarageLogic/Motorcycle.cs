@@ -19,6 +19,8 @@ namespace Ex03.GarageLogic
         public Motorcycle(Vehicle.eTypeOfVehicle i_Type)
             : base(i_Type)
         {
+            base.k_NumOfWheels = k_NumOfWheels;
+            base.k_MaximumWheelPressure = k_MaximumWheelPressure;
         }
 
         public enum eLicenseType
@@ -54,7 +56,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return String.Format(
-                "{3} License Type: {1}{0}, Engine Volume: {2}{0}",
+                "{3}License Type: {1}{0}Engine Volume: {2}{0}",
                 Environment.NewLine,
                 this.m_LicenseType,
                 this.m_EngineVolume,

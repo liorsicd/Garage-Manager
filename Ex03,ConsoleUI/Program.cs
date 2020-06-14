@@ -10,9 +10,12 @@ namespace Ex03_ConsoleUI
     {
         public static void Main()
         {
-            GarageManager g1  = new GarageManager();
-            g1.AddVehicle();
-
+            GarageManager gm = new GarageManager();
+            StartMenu sm = new StartMenu(gm);
+            while(true)
+            {
+                sm.Show();
+            }
         }
     }
 }
