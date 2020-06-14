@@ -42,17 +42,23 @@ namespace Ex03.GarageLogic
         public void SetEnergySource(EnergySource.eEnergyTypes i_EnergySource)
         {
             switch(i_EnergySource)
-            {
-                case EnergySource.eEnergyTypes.Electric:
-                    this.m_Vehicle.EnergySource = new ElectricEngine(EnergySource.eEnergyTypes.Electric);
-                    break;
-                case EnergySource.eEnergyTypes.Fuel:
-                    this.m_Vehicle.EnergySource = new FuelEngine(EnergySource.eEnergyTypes.Fuel);
-                    break;
-                default:
-                    throw new ArgumentException("not a valid energy source type");
-            }
+                {
+                    case EnergySource.eEnergyTypes.Electric:
+                        if(this.m_Vehicle.TypeVehicle == Vehicle.eTypeOfVehicle.Truck)
+                        {
+                            throw new ArgumentException("not a valid energy source for truck");
+                        }
+
+                        this.m_Vehicle.EnergySource = new ElectricEngine(EnergySource.eEnergyTypes.Electric);
+                        break;
+                    case EnergySource.eEnergyTypes.Fuel:
+                        this.m_Vehicle.EnergySource = new FuelEngine(EnergySource.eEnergyTypes.Fuel);
+                        break;
+                    default:
+                        throw new ArgumentException("not a valid energy source type");
+                }
             
+
             this.m_Vehicle.EnergySource.InitMaxAmountOfEnergy(this.m_Vehicle);
             this.m_EnergySourceSetters = this.getSetters(this.m_Vehicle.EnergySource);
         }

@@ -70,24 +70,18 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public bool FillEnergy(float i_AmountOfEnergy)
+        public void FillEnergy(float i_AmountOfEnergy)
         {
-            bool returnValue = false;
-
-            if(!(i_AmountOfEnergy + this.CurrentAmountOfEnergy > this.m_MaxAmountOfEnergy))
-            {
-                m_CurrentAmountOfEnergy += i_AmountOfEnergy;
-                returnValue = true;
-            }
-            else
+            if(i_AmountOfEnergy + this.CurrentAmountOfEnergy > this.m_MaxAmountOfEnergy)
             {
                 throw new ValueOutOfRangeException(
-                    "Max hours to fill is " + m_MaxAmountOfEnergy,
+                    "Max energy to fill is " + m_MaxAmountOfEnergy,
                     this.m_MaxAmountOfEnergy,
                     0);
             }
 
-            return returnValue;
+            m_CurrentAmountOfEnergy += i_AmountOfEnergy;
+            
         }
 
         public override string ToString()

@@ -25,10 +25,6 @@ namespace Ex03_ConsoleUI
             return choice;
         }
 
-        // private bool isMenuKey(string i_InputString)
-        // {
-        //     return i_InputString.Length == 1 && i_InputString[0] ==''
-        // }
 
         public bool IsValidOption(Type i_EnumType, out object o_Obj)
         {
@@ -85,7 +81,7 @@ namespace Ex03_ConsoleUI
         {
             string userInput = Display.Read();
             bool returnValue = userInput.Length > 0;
-            if (!int.TryParse(userInput, out o_ValidInteger))
+            if (!int.TryParse(userInput, out o_ValidInteger) || o_ValidInteger < 0)
             {
                Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
                returnValue = false;
@@ -100,7 +96,7 @@ namespace Ex03_ConsoleUI
         {
             string userInput = Display.Read();
             bool returnValue = userInput.Length > 0;
-            if(!float.TryParse(userInput, out o_ValidFloat))
+            if(!float.TryParse(userInput, out o_ValidFloat) || o_ValidFloat < 0)
             {
                 Display.Write(Messages.GetErrorMessage(Messages.eErrorMessagesToUser.InvalidInput));
                 returnValue = false;

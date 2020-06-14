@@ -62,7 +62,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return string.Format(
-                "Wheel Manufacturer Name: {1}{0}Current Air Pressure: {2}{0}Maximum Air Pressure:{3}{0}",
+                "Wheel Manufacturer Name: {1}{0}Current Air Pressure: {2}{0}Maximum Air Pressure:{3}",
                 Environment.NewLine,
                 this.r_ManufacturerName,
                 this.m_CurrentAirPressure,

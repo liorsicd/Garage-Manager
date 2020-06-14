@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ex03_ConsoleUI
 {
+    using Ex03.GarageLogic;
+
     public class Messages
     {
         private static readonly string[] sr_MessagesAddVehicle = 
@@ -23,7 +25,7 @@ namespace Ex03_ConsoleUI
             "Please enter license type",
             "Please enter cargo volume",
             "Please enter Y if carrying dangerous materials, else N", 
-            "Please enter owner current amount of energy",
+            "Please enter current amount of energy",
             "Please enter fuel type",
             "Please enter current air pressure",
             "Please enter amount Of liters to fuel",
@@ -37,15 +39,8 @@ namespace Ex03_ConsoleUI
             "Invalid String number, should contain only numbers",
             "Not valid name, please try again",
             "this vehicle is already exist in the garage",
-            "this vehicle not exist in the garage"
-            // "Garage is empty, No vehicles to display",
-            // "Invalid type of energy, please tey again",
-            // "Invalid fuel type, please try again",
-            // "Invalid num of doors, please try again",
-            // "Invalid color, please try again",
-            // "Invalid license type, please try again",
-            // "Not valid energy, please try again",
-            // "Not valid status, please try again",
+            "this vehicle not exist in the garage",
+            "No vehicles in this status"
             };
 
 
@@ -95,11 +90,12 @@ namespace Ex03_ConsoleUI
 
         public enum eErrorMessagesToUser
         {
-            InvalidInput = 0,
-            InvalidStringNum = 1,
-            InvalidName = 2,
+            InvalidInput,
+            InvalidStringNum,
+            InvalidName,
             VehicleExist,
-            VehicleNotExist
+            VehicleNotExist,
+            VehicleStatus
         }
 
 

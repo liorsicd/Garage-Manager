@@ -15,10 +15,9 @@ namespace Ex03.GarageLogic
        
         public enum eStatus
         {
-            OutOfGarage = 0,
-            InRepair = 1,
-            Repaired = 2,
-            Payed = 3
+            InRepair,
+            Repaired,
+            Payed
         }
 
         public VehicleInGarage(string i_OwnerName, string i_PhoneNumber,  Vehicle i_Vehicle)
@@ -26,7 +25,7 @@ namespace Ex03.GarageLogic
             this.r_OwnerName = i_OwnerName;
             this.r_PhoneNumber = i_PhoneNumber;
             this.m_Vehicle = i_Vehicle;
-            this.m_status = eStatus.OutOfGarage;
+            this.m_status = eStatus.InRepair;
         }
 
 

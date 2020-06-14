@@ -70,6 +70,7 @@ namespace Ex03_ConsoleUI
 
         private void setVehicleParams()
         {
+            GetInput:
             Display.Clear();
             object vehicleType;
             do
@@ -87,7 +88,7 @@ namespace Ex03_ConsoleUI
             {
                 Display.Write(e.Message);
                 Display.Wait();
-                this.setVehicleParams();
+                goto GetInput;
             }
             
 
@@ -97,30 +98,31 @@ namespace Ex03_ConsoleUI
 
         private void setEnergySourceParams()
         {
+            GetInput:
             Display.Clear();
-            object energyType;
-            do
-            {
-                Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnergySource)); 
-                Display.WriteEnum(typeof(EnergySource.eEnergyTypes));
-            }
-            while(!this.m_Validation.IsValidOption(typeof(EnergySource.eEnergyTypes), out energyType));
-
-            try
-            {
-                this.m_Factory.SetEnergySource((EnergySource.eEnergyTypes)energyType);
-            }
-            catch(ArgumentException e)
-            {
-                Display.Write(e.Message);
-                Display.Wait();
-                this.setEnergySourceParams();
-            }
             
-            runtObjectsSetters(this.m_Factory.GetEnergySourceSetters(), typeof(EnergySource));
-            this.m_Factory.GetVehicle().UpdateRemainingEnergy();
-        }
+                object energyType;
+                do
+                {
+                    Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.EnergySource));
+                    Display.WriteEnum(typeof(EnergySource.eEnergyTypes));
+                }
+                while(!this.m_Validation.IsValidOption(typeof(EnergySource.eEnergyTypes), out energyType));
 
+                try
+                {
+                    this.m_Factory.SetEnergySource((EnergySource.eEnergyTypes)energyType);
+                }
+                catch(ArgumentException e)
+                {
+                    Display.Write(e.Message);
+                    Display.Wait();
+                    goto GetInput;
+                }
+
+                runtObjectsSetters(this.m_Factory.GetEnergySourceSetters(), typeof(EnergySource));
+                this.m_Factory.GetVehicle().UpdateRemainingEnergy();
+        }
 
         private void runtObjectsSetters(List<MethodInfo> i_Setters, Type i_Type)
         {
@@ -129,22 +131,22 @@ namespace Ex03_ConsoleUI
                 ParameterInfo[] paramArr = s.GetParameters();
                 object[] returnParams = new object[paramArr.Length];
                 GetParameters:
-                    for(int i = 0; i < paramArr.Length; i++)
-                    {
-                        Display.Clear();
-                        returnParams[i] = this.getParameterFromUser(paramArr[i]);
-                    }
+                for(int i = 0; i < paramArr.Length; i++)
+                {
+                    Display.Clear();
+                    returnParams[i] = this.getParameterFromUser(paramArr[i]);
+                }
 
-                    try
-                    {
-                        this.m_Factory.RunSetter(s, returnParams, i_Type);
-                    }
-                    catch(Exception e)
-                    {
-                        Display.Write(e.InnerException.Message);
-                        Display.Wait();
-                        goto GetParameters;
-                    }
+                try
+                {
+                    this.m_Factory.RunSetter(s, returnParams, i_Type);
+                }
+                catch(Exception e)
+                {
+                    Display.Write(e.InnerException.Message);
+                    Display.Wait();
+                    goto GetParameters;
+                }
             }
         }
 
@@ -253,14 +255,14 @@ namespace Ex03_ConsoleUI
 
                 case "i_CurrentAmountOfEnergy":
                     float currentAmount;
-                        do
-                        {
-                            Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.CurrentEnergyAmount)); 
-                        }
-                        while(!this.m_Validation.IsValidFloat(out currentAmount));
+                    do
+                    {
+                        Display.Write(Messages.GetMessageAddVehicle(Messages.eAddVehicle.CurrentEnergyAmount)); 
+                    }
+                    while(!this.m_Validation.IsValidFloat(out currentAmount));
 
-                        returnValue = currentAmount;
-                        break;
+                    returnValue = currentAmount;
+                    break;
 
                 case "i_FuelType":
                     object fuelType;

@@ -8,31 +8,32 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private Dictionary<string, VehicleInGarage> m_VehiclesInGarages;
+        private readonly Dictionary<string, VehicleInGarage> r_VehiclesInGarages;
 
         public Garage()
         {
-            this.m_VehiclesInGarages = new Dictionary<string, VehicleInGarage>();
+            this.r_VehiclesInGarages = new Dictionary<string, VehicleInGarage>();
         }
 
         public bool IsVehicleExist(string i_LicenseNumber)
         {
-            return m_VehiclesInGarages.TryGetValue(i_LicenseNumber, out VehicleInGarage currentVehicleInGarage);
+            return this.r_VehiclesInGarages.TryGetValue(i_LicenseNumber, out VehicleInGarage currentVehicleInGarage);
             
         }
 
         public void InsertVehicle(VehicleInGarage i_VehicleInGarage)
         {
-            this.m_VehiclesInGarages.Add(i_VehicleInGarage.Vehicle.LicenseNumber, i_VehicleInGarage);
+            this.r_VehiclesInGarages.Add(i_VehicleInGarage.Vehicle.LicenseNumber, i_VehicleInGarage);
             ChangeVehicleStatus(i_VehicleInGarage.Vehicle.LicenseNumber, VehicleInGarage.eStatus.InRepair);
         }
 
-        public List<string> GetListOfVehiclesInGarage(VehicleInGarage.eStatus i_status)
+        public List<string> GetListOfVehiclesInGarage(VehicleInGarage.eStatus i_Status)
         {
+
             List<string> list = new List<string>();
-            foreach (KeyValuePair<string, VehicleInGarage> v in this.m_VehiclesInGarages)
+            foreach(KeyValuePair<string, VehicleInGarage> v in this.r_VehiclesInGarages)
             {
-                if(v.Value.Status == i_status)
+                if(v.Value.Status == i_Status)
                 {
                     list.Add(v.Key);
                 }
@@ -44,7 +45,7 @@ namespace Ex03.GarageLogic
 
         private bool getVehicleInGarage(string i_LicenseNumber, out VehicleInGarage i_CurrentVehicleInGarage)
         {
-            return this.m_VehiclesInGarages.TryGetValue(i_LicenseNumber, out i_CurrentVehicleInGarage);
+            return this.r_VehiclesInGarages.TryGetValue(i_LicenseNumber, out i_CurrentVehicleInGarage);
         }
 
         public bool ChangeVehicleStatus(string i_LicenseNumber, VehicleInGarage.eStatus i_Status)
@@ -59,53 +60,53 @@ namespace Ex03.GarageLogic
             return returnValue;
         }
 
-        public bool AddAir(string i_LicenseNumber)
+        public void AddAir(string i_LicenseNumber)
         {
-            bool returnValue = false;
             if(getVehicleInGarage(i_LicenseNumber, out VehicleInGarage currentVehicleInGarage))
             {
-                returnValue = true;
                 foreach(Wheel w in currentVehicleInGarage.Vehicle.Wheels)
                 {
                     w.AddAir(w.MaxAirPressure - w.CurrentAirPressure);
                 }
             }
-
-            return returnValue;
         }
 
-        public bool AddFuel(string i_LicenseNumber, float i_FuelToAdd, FuelEngine.eFuelType i_Type)
+        public void AddFuel(string i_LicenseNumber, float i_FuelToAdd, FuelEngine.eFuelType i_Type)
         {
-            bool returnValue = false;
-
             if(getVehicleInGarage(i_LicenseNumber, out VehicleInGarage currentVehicleInGarage))
             {
-                if(((FuelEngine)currentVehicleInGarage.Vehicle.EnergySource).checkFuelType(i_Type))
+                if(currentVehicleInGarage.Vehicle.EnergySource.EnergyType != EnergySource.eEnergyTypes.Fuel)
                 {
-                    returnValue = currentVehicleInGarage.Vehicle.EnergySource.FillEnergy(i_FuelToAdd);
+                    throw new ArgumentException("wrong operation for this energy source");
                 }
-                else
+
+                if(!((FuelEngine)currentVehicleInGarage.Vehicle.EnergySource).checkFuelType(i_Type))
                 {
                     throw new ArgumentException("not correct fuel type");
                 }
+
+                currentVehicleInGarage.Vehicle.EnergySource.FillEnergy(i_FuelToAdd);
             }
 
             currentVehicleInGarage.Vehicle.UpdateRemainingEnergy();
 
-            return returnValue;
         }
 
-        public bool Recharge(string i_LicenseNumber, float i_MinutesToAdd)
+        public void Recharge(string i_LicenseNumber, float i_MinutesToAdd)
         {
-            bool returnValue = false;
+            
             if(getVehicleInGarage(i_LicenseNumber, out VehicleInGarage currentVehicleInGarage))
             {
-                returnValue = currentVehicleInGarage.Vehicle.EnergySource.FillEnergy(i_MinutesToAdd / 60);
+                if(currentVehicleInGarage.Vehicle.EnergySource.EnergyType != EnergySource.eEnergyTypes.Electric)
+                {
+                    throw new ArgumentException("wrong operation for this energy source");
+                }
+
+                currentVehicleInGarage.Vehicle.EnergySource.FillEnergy(i_MinutesToAdd / 60);
             }
 
             currentVehicleInGarage.Vehicle.UpdateRemainingEnergy();
 
-            return returnValue;
         }
 
         public bool ShowVehicleDetails(string i_LicenseNumber, out string o_Details)
